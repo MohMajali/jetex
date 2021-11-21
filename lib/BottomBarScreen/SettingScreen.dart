@@ -144,7 +144,7 @@ class SettingScreen extends StatelessWidget {
                         Column(
                           children: [
                             Text(
-                              'About Us || App ',
+                              getLang(context, "AboutUs"),
                               style: TextStyle(
                                 fontSize: 20,
                                 color: PrimaryColor,
@@ -171,7 +171,7 @@ class SettingScreen extends StatelessWidget {
                                     BorderRadius.all(Radius.circular(15))),
                             child: Center(
                                 child: Text(
-                              'App Devlopment',
+                              getLang(context, "AppDevlopment"),
                               style: TextStyle(
                                   color: SecondryColor,
                                   fontWeight: FontWeight.bold,
@@ -191,7 +191,7 @@ class SettingScreen extends StatelessWidget {
                                     BorderRadius.all(Radius.circular(15))),
                             child: Center(
                                 child: Text(
-                              'Contact us',
+                              getLang(context, "settingcontactbun"),
                               style: TextStyle(
                                   color: SecondryColor,
                                   fontWeight: FontWeight.bold,
@@ -229,6 +229,7 @@ class SettingScreen extends StatelessWidget {
                 ),
                 onTap: () {
                   sharedPreferences.clear();
+                  sharedPreferences.setBool("Remember", false);
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },

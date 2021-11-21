@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
 
-const PrimaryColor = Color(0xffedb54f);
-const SecondryColor = Color(0xff222222);
+const PrimaryColor = Color(0xfffd6600);
+
+const SecondryColor = Color(0xffFFFFFF);
 const TitlesTextStyle = TextStyle(
     color: SecondryColor,
     fontSize: 18,
@@ -23,7 +24,8 @@ Container loginlogocontainer(BuildContext context) {
           bottomLeft: Radius.circular(35),
           bottomRight: Radius.circular(35),
         ),
-        image: DecorationImage(image: AssetImage('assets/image/jetta-01.png'))),
+        image: DecorationImage(
+            image: AssetImage('assets/image/jettaexnew01.png'))),
   );
 }
 
@@ -58,7 +60,7 @@ Container loginstoreconterinr(
     String label) {
   return Container(
     decoration: BoxDecoration(
-      color: Colors.white.withOpacity(.1),
+      color: Colors.black.withOpacity(.2),
       borderRadius: BorderRadius.circular(12),
     ),
     margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -86,8 +88,8 @@ Container loginstoreconterinr(
                 BorderSide(width: 0, color: Colors.white.withOpacity(.12)),
             borderRadius: BorderRadius.circular(3)),
         contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-        labelText: label,
-        labelStyle: TextStyle(
+        hintText: label,
+        hintStyle: TextStyle(
           color: SecondryColor,
           letterSpacing: 0,
         ),
@@ -103,7 +105,7 @@ Container loginsavebutton(BuildContext context) {
     width: MediaQuery.of(context).size.width * .4,
     decoration: BoxDecoration(
         color: SecondryColor,
-        borderRadius: BorderRadius.all(Radius.circular(3))),
+        borderRadius: BorderRadius.all(Radius.circular(25))),
     child: Center(
         child: Text(
       getLang(context, "LogBotton"),

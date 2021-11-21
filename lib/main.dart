@@ -9,7 +9,6 @@ import 'package:jettaexstores/Screens/ProdcutDitalScreen.dart';
 import 'package:jettaexstores/Screens/SplashScreen.dart';
 import 'package:jettaexstores/Screens/SubCategory.dart';
 import 'package:jettaexstores/Widget/NavBar.dart';
-import 'package:jettaexstores/config/Api_Test.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/homepage.dart';
 import 'package:flutter/widgets.dart';
@@ -20,6 +19,7 @@ import 'Screens/CategoryScreen.dart';
 import 'Screens/RevewisScreen.dart';
 import 'Provider/Localapp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
 
 SharedPreferences sharedPreferences;
 
@@ -55,6 +55,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       localizationsDelegates: [
         AppLocale.delegate,
@@ -84,11 +88,15 @@ class _MyAppState extends State<MyApp> {
           buttonColor: Color(0xffedb54f),
           iconTheme: IconThemeData(color: Color(0xffedb54f))),
       debugShowCheckedModeBanner: false,
-      initialRoute: 'LoginScreen',
+      initialRoute: null == sharedPreferences.getBool("Remember") ||
+              false == sharedPreferences.getBool("Remember")
+          ? 'LoginScreen'
+          : 'directLogin',
       routes: {
         'EditProduct': (context) => EditProduct(),
         // 'Api_test': (context) => Api_test(),
         'LoginScreen': (context) => LoginScreen(),
+        'directLogin': (context) => Home(),
         'Home': (context) => Home(),
         'SettingScreen': (context) => SettingScreen(),
         'NoteficationScreen': (context) => NoteficationScreen(),
@@ -98,7 +106,7 @@ class _MyAppState extends State<MyApp> {
         'OrderScreen': (context) => OrderScreen(),
         'ProdcutScreen': (context) => ProdcutScreen(),
         'RevewiesScreen': (context) => RevewiesScreen(),
-        // 'AddProdcut': (context) => AddProdcut(),
+        'AddProdcut': (context) => AddProdcut(),
         'SubCategory': (context) => SubCategory(),
         'ProscutDitalScreen': (context) => ProscutDitalScreen(),
       },

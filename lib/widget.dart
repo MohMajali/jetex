@@ -12,7 +12,7 @@ Widget ProdcutsBoxs(context, String boxname, String rout) {
       margin: EdgeInsets.all(10),
       width: MediaQuery.of(context).size.width / 2.3,
       decoration: BoxDecoration(
-          color: Color(0xffedb54f), borderRadius: BorderRadius.circular(15)),
+          color: PrimaryColor, borderRadius: BorderRadius.circular(15)),
       child: Center(
           child: Text(
         boxname,
@@ -64,7 +64,7 @@ Widget Editbutton({double radios, onTap, IconData ico}) {
             color: SecondryColor,
             size: 18,
           ),
-          backgroundColor: Color(0xffedb54f)),
+          backgroundColor: PrimaryColor),
     ),
   );
 }

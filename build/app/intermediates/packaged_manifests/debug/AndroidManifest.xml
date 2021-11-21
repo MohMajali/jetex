@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jetedit"
+    package="net.jettaex"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -16,7 +16,7 @@
     <application
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/jettaex"
         android:label="Jettex Store" >
         <activity
             android:name="com.example.jetedit.MainActivity"
@@ -62,7 +62,7 @@
 
         <provider
             android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-            android:authorities="com.example.jetedit.flutter.image_provider"
+            android:authorities="net.jettaex.flutter.image_provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data

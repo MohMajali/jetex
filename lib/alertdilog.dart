@@ -65,17 +65,18 @@ class _cadState extends State<cad> {
             ));
           } else {
             return Container(
-              height: MediaQuery.of(context).size.height * .75,
+              height: MediaQuery.of(context).size.height * .6,
               width: MediaQuery.of(context).size.width * .75,
               decoration: BoxDecoration(
                 color: SecondryColor,
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height * .12,
-                    width: MediaQuery.of(context).size.width * .35,
+                    height: MediaQuery.of(context).size.height * .25,
+                    width: MediaQuery.of(context).size.width * .65,
                     decoration: BoxDecoration(
                         border: Border.all(
                           width: 3,
@@ -88,8 +89,10 @@ class _cadState extends State<cad> {
                                 : NetworkImage(
                                     'https://images-na.ssl-images-amazon.com/images/I/513CiKyzUWL.jpg'),
                             fit: BoxFit.fill)),
-                    // child: CircleAvatar(
-                    //     radius: 40, backgroundImage:  NetworkImage('https://th.bing.com/th/id/R.3e90674b7ea7ef69d4301c3d7cce2d8a?rik=73p7jRIdO%2fLj5A&pid=ImgRaw&r=0')   ),
+                  ),
+
+                  SizedBox(
+                    height: 15,
                   ),
 
                   Container(
@@ -108,10 +111,29 @@ class _cadState extends State<cad> {
                     padding: EdgeInsets.all(5),
                     width: double.infinity,
                   ),
-                  buildListTile(
-                    Icons.edit,
-                    widget.desen,
+                  SizedBox(
+                    height: 15,
                   ),
+                  Container(
+                    child: Center(
+                        child: Text(
+                      widget.desen,
+                      style: TextStyle(
+                          color: SecondryColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    )),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: PrimaryColor,
+                    ),
+                    padding: EdgeInsets.all(5),
+                    width: double.infinity,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+
                   Container(
                     child: Center(
                         child: Text(
@@ -128,11 +150,13 @@ class _cadState extends State<cad> {
                     padding: EdgeInsets.all(5),
                     width: double.infinity,
                   ),
-                  buildListTile(Icons.star, widget.desar),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Container(
                     child: Center(
                         child: Text(
-                      'Price',
+                      widget.nameen,
                       style: TextStyle(
                           color: SecondryColor,
                           fontSize: 16,
@@ -145,7 +169,26 @@ class _cadState extends State<cad> {
                     padding: EdgeInsets.all(5),
                     width: double.infinity,
                   ),
-                  buildListTile(Icons.money_off, widget.price),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    child: Center(
+                        child: Text(
+                      widget.price + "\$",
+                      style: TextStyle(
+                          color: SecondryColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    )),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: PrimaryColor,
+                    ),
+                    padding: EdgeInsets.all(5),
+                    width: double.infinity,
+                  ),
+                  // buildListTile(Icons.money_off, widget.price),
                   // buildListTile(
                   //     Icons.location_on, getLang(context, "StoreLocationEdit")),
                 ],

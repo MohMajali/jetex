@@ -2,7 +2,7 @@
     package="com.example.jetedit">
    <application
         android:label="Jettex Store"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/jettaex">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

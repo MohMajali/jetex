@@ -12,16 +12,14 @@ class ProdcutScreen extends StatefulWidget {
 }
 
 class _ProdcutScreenState extends State<ProdcutScreen> {
-
-
-  Future<List<Categoryapi>> _getData() async {
+  Future<List<MainCategory>> _getData() async {
     String url = 'http://45.76.132.167/api/authentication/categoryapi.php';
     var response = await http.get(Uri.parse(url));
     var jsonData = json.decode(response.body);
-    List<Categoryapi> cat = [];
+    List<MainCategory> cat = [];
 
     for (var itm in jsonData) {
-      cat.add(Categoryapi.fromJson(itm));
+      cat.add(MainCategory.fromJson(itm));
     }
     return cat;
   }
@@ -32,8 +30,7 @@ class _ProdcutScreenState extends State<ProdcutScreen> {
       appBar: AppBar(
         foregroundColor: SecondryColor,
         backgroundColor: PrimaryColor,
-        title: Text('Categorys ',style: TextStyle(color: SecondryColor)),
-
+        title: Text('Categorys ', style: TextStyle(color: SecondryColor)),
       ),
       backgroundColor: SecondryColor,
       body: FutureBuilder(

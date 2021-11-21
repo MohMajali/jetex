@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jettaexstores/config/Constant.dart';
 
 class revied extends StatefulWidget {
-  final String namee;
   final String reviwee;
 
   const revied(
-    this.namee,
     this.reviwee,
   );
 
@@ -26,22 +24,6 @@ class _reviedState extends State<revied> {
       child: Column(
         //mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            child: Center(
-                child: Text(
-              widget.namee,
-              style: TextStyle(
-                  color: SecondryColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
-            )),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: PrimaryColor,
-            ),
-            padding: EdgeInsets.all(5),
-            width: double.infinity,
-          ),
           buildListTile(
             widget.reviwee,
           ),

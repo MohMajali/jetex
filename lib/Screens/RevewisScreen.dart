@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/reviewapi.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/Widget/review.dart';
+import 'package:jettaexstores/config/Configers.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,11 +23,8 @@ class _RevewiesScreenState extends State<RevewiesScreen> {
 
   Future<List<ReviewApi>> _getReview() async {
     var getStoreID = {"storeID": sharedPreferences.getString("storeID")};
-    print(getStoreID['storeID'].toString());
 
-    String url =
-        'http://45.76.132.167/api/authentication/reviewsapi.php?stores_id=' +
-            getStoreID['storeID'].toString();
+    String url = Api.getReviews + getStoreID['storeID'].toString();
 
     var response = await http.get(
       Uri.parse(url),
@@ -51,14 +49,12 @@ class _RevewiesScreenState extends State<RevewiesScreen> {
 
   void showAlertDialog(
     BuildContext context,
-    String name,
     String review,
   ) {
     final AlertDialog alert = AlertDialog(
       backgroundColor: SecondryColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       content: revied(
-        name,
         review,
       ),
     );
@@ -121,23 +117,20 @@ class _RevewiesScreenState extends State<RevewiesScreen> {
               return Column(
                 children: [
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       SizedBox(height: 3),
                       InkWell(
                         onTap: () {
-                          showAlertDialog(
-                              context, reviewApi.name, reviewApi.review);
+                          showAlertDialog(context, reviewApi.review);
                         },
                         child: Card(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           color: PrimaryColor,
                           child: Padding(
-                            padding: const EdgeInsets.all(1.0),
+                            padding: const EdgeInsets.all(5),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
@@ -148,11 +141,23 @@ class _RevewiesScreenState extends State<RevewiesScreen> {
                                     Expanded(
                                       child: Row(
                                         children: [
-                                          CircleAvatar(
-                                            backgroundColor: SecondryColor,
-                                            radius: 35,
-                                            backgroundImage: NetworkImage(
-                                                'https://www.seriouseats.com/thmb/XhfxmcTdvTRcJtPpqwz5G0s9aBs=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__sweets.seriouseats.com__images__2015__04__20150428-best-apples-for-pie-reupload-kenji-1-4d0a4c15136e4819814b2d205d2dc08f.jpg'),
+                                          Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                .1,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .21,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadiusDirectional
+                                                        .circular(8),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                        'https://images-na.ssl-images-amazon.com/images/I/513CiKyzUWL.jpg'),
+                                                    fit: BoxFit.fill)),
                                           ),
                                           SizedBox(
                                             width: 8,
@@ -166,11 +171,29 @@ class _RevewiesScreenState extends State<RevewiesScreen> {
                                               Text(
                                                 reviewApi.name,
                                                 style: TextStyle(
-                                                  fontSize: 18,
+                                                  fontSize: 20,
                                                   color: SecondryColor,
                                                   fontWeight: FontWeight.bold,
                                                 ),
-                                                // textAlign: TextAlign.left,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  SmoothStarRating(
+                                                      allowHalfRating: true,
+                                                      onRated: (v) {},
+                                                      starCount: 5,
+                                                      rating: double.parse(
+                                                          reviewApi.rating
+                                                              .toString()),
+                                                      size: 20.0,
+                                                      isReadOnly: true,
+                                                      color: Colors.yellow,
+                                                      borderColor:
+                                                          Colors.yellow,
+                                                      spacing: 0.0),
+                                                ],
                                               ),
                                               Container(
                                                 padding:
@@ -192,39 +215,16 @@ class _RevewiesScreenState extends State<RevewiesScreen> {
                                         ],
                                       ),
                                     ),
-                                    // SizedBox(
-                                    //   width: MediaQuery.of(context).size.width *
-                                    //       .27,
-                                    // ),
-
                                     Container(
                                       child: Center(
                                         child: IconButton(
                                           icon: const Icon(Icons.report),
                                           color: SecondryColor,
                                           iconSize: 30,
-                                          onPressed: () => print('object'),
+                                          onPressed: () {},
                                         ),
                                       ),
                                     )
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    SmoothStarRating(
-                                        allowHalfRating: true,
-                                        onRated: (v) {
-                                          // v = sharedPreferences.getDouble("storeRate");
-                                        },
-                                        starCount: 5,
-                                        rating: double.parse(
-                                            reviewApi.rating.toString()),
-                                        size: 30.0,
-                                        isReadOnly: true,
-                                        color: Colors.yellow,
-                                        borderColor: Colors.yellow,
-                                        spacing: 0.0),
                                   ],
                                 ),
                               ],
@@ -234,6 +234,7 @@ class _RevewiesScreenState extends State<RevewiesScreen> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 7),
                 ],
               );
             }

@@ -40,34 +40,26 @@ class loginp {
         });
 
     try {
-
       print(email + password);
       Map data = {"Email": email, "Password": password};
       var url = Uri.parse(Api.login_api);
 
       var response = await http.post(url, body: data);
-      
+
       final result = jsonDecode(response.body);
-      
+
       String situation = result['result'];
       String storeID = result['Store']['id'];
-      print(storeID);
       String storeLogo = result['Store']['store_logo'];
-      print(storeLogo);
       String storeNameEn = result['Store']['name_en'];
-      print(storeNameEn);
       String storeNameAr = result['Store']['name_ar'];
       String rate = result['Store']['rate'];
-      print(rate);
-      // // String password = result['Store']['password'];
       String storeType = result['Store']['store_type'];
       String storeEmail = result['Store']['store_email'];
       String userId = result['Store']['user_id'];
       String phoneNumber = result['Store']['phone_number'];
       String active = result['Store']['active'];
 
-
-      print('SITUATION------>'+situation);
       Navigator.pop(context);
       if (situation == "1") {
         SharedPreferences sharedPreferences =
@@ -77,12 +69,10 @@ class loginp {
         sharedPreferences.setString("storeNameEn", storeNameEn);
         sharedPreferences.setString("storeNameAr", storeNameAr);
         sharedPreferences.setDouble("storeRate", double.parse(rate));
-        // sharedPreferences.setString("password", password);
         sharedPreferences.setString("storeType", storeType);
         sharedPreferences.setString("storeEmail", storeEmail);
         sharedPreferences.setString("userId", userId);
         sharedPreferences.setString("phoneNumber", phoneNumber);
-        //sharedPreferences.setString("userdata", userdata);
         sharedPreferences.setString("Password", password);
         sharedPreferences.setString("active", active);
         sharedPreferences.setBool("Remember", true);
@@ -113,7 +103,7 @@ class loginp {
         headerAnimationLoop: true,
         dialogType: DialogType.ERROR,
         body: Text(
-          'Connection Error '+e.toString(),
+          'Connection Error ' + e.toString(),
           style: TextStyle(
               color: PrimaryColor, fontWeight: FontWeight.bold, fontSize: 30),
         ),

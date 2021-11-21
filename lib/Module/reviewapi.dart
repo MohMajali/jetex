@@ -19,24 +19,27 @@ class ReviewApi {
     this.review,
     this.name,
     this.email,
+    this.profilePhotoPath,
   });
 
-  int id;
-  int userId;
-  int storesId;
-  num rating;
-  String review;
-  String name;
-  String email;
+  final int id;
+  final int userId;
+  final int storesId;
+  final num rating;
+  final String review;
+  final String name;
+  final String email;
+  final String profilePhotoPath;
 
   factory ReviewApi.fromJson(Map<String, dynamic> json) => ReviewApi(
         id: json["id"],
         userId: json["user_id"],
         storesId: json["stores_id"],
-        rating: json["rating"],
+        rating: json["rating"].toDouble(),
         review: json["review"],
         name: json["name"],
         email: json["email"],
+        profilePhotoPath: json["profile_photo_path"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -47,5 +50,6 @@ class ReviewApi {
         "review": review,
         "name": name,
         "email": email,
+        "profile_photo_path": profilePhotoPath,
       };
 }

@@ -92,7 +92,6 @@ class _HomeState extends State<Home> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-
                 MaterialButton(
                   minWidth: 40,
                   onPressed: () {

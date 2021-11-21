@@ -6,6 +6,8 @@ import 'package:jettaexstores/config/log_in.dart';
 import 'package:jettaexstores/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../homepage.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -49,6 +51,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         await SharedPreferences.getInstance();
                     logprefs.setString('e', StoreEmail.text);
                     logprefs.setString('p', StorePassword.text);
+                    sharedPreferences.setBool("Remember", true);
+
                     loginp(
                             email: logprefs.getString('e'),
                             password: logprefs.getString('p'))
@@ -72,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Container logignpasscontiner(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(.1),
+        color: Colors.black.withOpacity(0.2),
         borderRadius: BorderRadius.circular(12),
       ),
       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -98,9 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 40),
-          labelText: getLang(context, "LogStorePass"),
-          labelStyle: TextStyle(
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+          hintText: getLang(context, "LogStorePass"),
+          hintStyle: TextStyle(
             color: SecondryColor,
             letterSpacing: 0,
           ),

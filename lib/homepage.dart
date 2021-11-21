@@ -15,10 +15,15 @@ import 'Provider/Localapp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import 'Screens/LoginScreen.dart';
+import 'config/Configers.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
+
+//HIIII
 
 class _HomePageState extends State<HomePage> {
   File _image;
@@ -47,8 +52,6 @@ class _HomePageState extends State<HomePage> {
       "store_logo": imageName,
       "imageCode": imageCode
     });
-
-    print('RESPONSE------>' + response.body);
   }
 
   Future deleteLogo(var id) async {
@@ -56,7 +59,7 @@ class _HomePageState extends State<HomePage> {
     try {
       final response =
           await http.post(Uri.parse(url), body: {"id": id.toString()});
-      print('RESPONSE------>' + response.body);
+
       setState(() {
         sharedPreferences.setString('storeLogo', 'defaultStorelogo.jpg');
         imageCache.clear();
@@ -67,10 +70,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<List<Infoapi>> _getData() async {
-    String url =
-        'http://45.76.132.167/api/authentication/mainStoreinfo.php?id=';
+    String url = Api.getInfo;
     var getStore = {"storeID": sharedPreferences.getString("storeID")};
-    print(getStore);
+
     var response = await http.post(
       Uri.parse(url),
       body: getStore,
@@ -240,14 +242,9 @@ class _HomePageState extends State<HomePage> {
                             "storeID": sharedPreferences.getString("storeID")
                           };
 
-                          print(imageName);
-
                           var id = storeId['storeID'];
-                          // print(image);
-                          updateLogo(id, imageName, imageCode);
 
-                          print(sharedPreferences.getString('storeLogo'));
-                          // sharedPreferences.remove('storeLogo');
+                          updateLogo(id, imageName, imageCode);
 
                           sharedPreferences.setString('storeLogo', imageName);
                           setState(() {
@@ -262,7 +259,10 @@ class _HomePageState extends State<HomePage> {
                       onTap: () async {
                         var storeId = sharedPreferences.getString("storeID");
 
-                        deleteLogo(storeId);
+                        await deleteLogo(storeId);
+                        setState(() {
+                          _getData();
+                        });
                       },
                     ),
                   ],
@@ -294,32 +294,9 @@ class _HomePageState extends State<HomePage> {
                       rating: sharedPreferences.getDouble("storeRate"),
                       size: 30.0,
                       isReadOnly: true,
-                      color: Colors.yellow,
-                      borderColor: Colors.yellow,
+                      color: PrimaryColor,
+                      borderColor: Color(0xffbf942e),
                       spacing: 0.0),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            // Icon(
-                            //   Icons.star,
-                            //   size: 17,
-                            // ),
-                            // Icon(Icons.star, size: 17),
-                            // Icon(Icons.star, size: 17),
-                            // Icon(Icons.star, size: 17),
-                            // Icon(Icons.star, size: 17),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
                 ),
               ],
             ),

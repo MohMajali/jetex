@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/productlastapi.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/alertdilog.dart';
+import 'package:jettaexstores/config/Configers.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/main.dart';
 import 'package:http/http.dart' as http;
@@ -17,13 +18,10 @@ class ProscutDitalScreen extends StatefulWidget {
 class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
   List<ProductsApi> products = [];
   dynamic storeData;
-  String imageUrl = 'http://45.76.132.167/productImages/';
+  var getStoreID = {"storeID": sharedPreferences.getString("storeID")};
+  var lang = sharedPreferences.getString("lang");
   Future<List<ProductsApi>> _getData() async {
-    var getStoreID = {"storeID": sharedPreferences.getString("storeID")};
-
-    String url =
-        'http://45.76.132.167/api/authentication/productview.php?store_id=' +
-            getStoreID['storeID'].toString();
+    String url = Api.getProdcts + getStoreID['storeID'].toString();
 
     var response = await http.get(Uri.parse(url));
 
@@ -34,6 +32,26 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
       // ignore: deprecated_member_use
       return List<ProductsApi>();
     }
+  }
+
+  Future deleteProduct(var id) async {
+    String url = Api.deleteProduct + id.toString();
+    try {
+      final response =
+          await http.post(Uri.parse(url), body: {"id": id.toString()});
+      setState(() {});
+    } catch (e) {}
+  }
+
+  Future addProduct(
+      var storeID, String nameEnglish, String nameArabic, var price) async {
+    var url = Api.addProduct;
+    final response = await http.post(Uri.parse(url), body: {
+      "name_en": nameEnglish,
+      "name_ar": nameArabic,
+      "store_id": storeID,
+      "price": price
+    });
   }
 
   void showAlertDialog(BuildContext context, String nameen, String namear,
@@ -68,13 +86,14 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, 'AddProdcut');
+                  addProductDialog();
                 },
                 icon: Icon(Icons.add))
           ],
           foregroundColor: SecondryColor,
           backgroundColor: PrimaryColor,
-          title: Text('Products', style: TextStyle(color: SecondryColor)),
+          title: Text(getLang(context, "ProductButton"),
+              style: TextStyle(color: SecondryColor)),
         ),
         backgroundColor: SecondryColor,
         body: ListView.builder(
@@ -88,12 +107,11 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
             } else {
               return Slidable(
                 actionPane: SlidableDrawerActionPane(),
-                actions: <Widget>[
-                  SlideContiner(Icons.share, Colors.indigo, 'Share'),
-                ],
                 secondaryActions: <Widget>[
                   InkWell(
                       onTap: () {
+                        sharedPreferences.setInt(
+                            'selectedProductID', productsApi.id);
                         Navigator.pushNamed(context, 'EditProduct', arguments: {
                           "id": productsApi.id,
                           "namear": productsApi.nameAr,
@@ -102,116 +120,206 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
                           "desar": productsApi.descriptionAr,
                           "desen": productsApi.descriptionEn,
                           "price": productsApi.price,
-                          "discount": productsApi.discount
+                          "discount": productsApi.discount,
+                          "warranty": productsApi.warranty,
+                          "modelNumber": productsApi.modelNumber
                         });
                       },
-                      child: SlideContiner(Icons.edit, Colors.black54, 'Edit')),
-                  SlideContiner(Icons.delete, Colors.red, 'Delete')
+                      child: slideContiner(Icons.edit, Colors.black54,
+                          getLang(context, "Edit"))),
+                  InkWell(
+                    onTap: () async {
+                      var id = productsApi.id;
+
+                      await deleteProduct(id);
+                      setState(() {
+                        _getData().then((productsList) {
+                          setState(() {
+                            products = productsList;
+                          });
+                        });
+                      });
+                    },
+                    child: slideContiner(
+                        Icons.delete, Colors.red, getLang(context, "delete")),
+                  )
                 ],
                 child: Container(
                     margin: EdgeInsets.symmetric(vertical: 3, horizontal: 5),
                     decoration: BoxDecoration(
-                        color: Color(0xffedb54f),
+                        color: PrimaryColor,
                         borderRadius: BorderRadiusDirectional.circular(8)),
-                    child: null == productsApi.image
-                        ? ListTile(
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: 15,
-                              vertical: 8,
-                            ),
-                            leading: Container(
-                              height: MediaQuery.of(context).size.height * 2,
-                              width: MediaQuery.of(context).size.width * .21,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadiusDirectional.circular(8),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          'https://images-na.ssl-images-amazon.com/images/I/513CiKyzUWL.jpg'),
-                                      fit: BoxFit.fill)),
-                            ),
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
+                    child: ListTile(
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 8,
+                      ),
+                      leading: Container(
+                        height: MediaQuery.of(context).size.height * 2,
+                        width: MediaQuery.of(context).size.width * .21,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadiusDirectional.circular(8),
+                            image: DecorationImage(
+                                image:
+                                    NetworkImage(Api.img + productsApi.image),
+                                fit: BoxFit.fill)),
+                      ),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          lang == 'ar'
+                              ? Text(
+                                  productsApi.nameAr,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: SecondryColor),
+                                )
+                              : Text(
                                   productsApi.nameEn,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: SecondryColor),
                                 ),
-                                const SizedBox(height: 4),
-                                // Text(
-                                //   snapshot.data[index].descriptionEn,
-                                //   style: TextStyle(color: Colors.black54),
-                                // )
-                              ],
-                            ),
-                            onTap: () {
-                              showAlertDialog(
-                                context,
-                                productsApi.nameAr,
-                                productsApi.descriptionEn,
-                                productsApi.descriptionAr,
-                                productsApi.price.toString(),
-                                productsApi.nameEn,
-                                productsApi.image,
-                              );
-                            },
-                          )
-                        : ListTile(
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: 15,
-                              vertical: 8,
-                            ),
-                            leading: Container(
-                              height: MediaQuery.of(context).size.height * 2,
-                              width: MediaQuery.of(context).size.width * .21,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadiusDirectional.circular(8),
-                                  image: DecorationImage(
-                                      image: NetworkImage(productsApi.image),
-                                      fit: BoxFit.fill)),
-                            ),
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  productsApi.nameEn,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: SecondryColor),
-                                ),
-                                const SizedBox(height: 4),
-                                // Text(
-                                //   snapshot.data[index].descriptionEn,
-                                //   style: TextStyle(color: Colors.black54),
-                                // )
-                              ],
-                            ),
-                            onTap: () {
-                              // print(snapshot.data[index].id);
-                              // print(snapshot.data[index].nameEn);
-                              showAlertDialog(
-                                context,
-                                productsApi.nameAr,
-                                productsApi.descriptionEn,
-                                productsApi.descriptionAr,
-                                productsApi.price.toString(),
-                                productsApi.nameEn,
-                                productsApi.image,
-                              );
-                            },
-                          )),
+                          const SizedBox(height: 4),
+                        ],
+                      ),
+                      onTap: () {},
+                    )),
               );
             }
           },
           itemCount: null == products ? 0 : products.length,
         ));
   }
+
+  FloatingActionButton cbuildFloatingActionButton() {
+    return FloatingActionButton(
+      backgroundColor: Color(0xffedb54f),
+      onPressed: null,
+      child: Icon(
+        Icons.home,
+        color: SecondryColor,
+      ),
+    );
+  }
+
+  Future<bool> addProductDialog() {
+    TextEditingController englishName = TextEditingController();
+    TextEditingController arabicName = TextEditingController();
+    TextEditingController price = TextEditingController();
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+          backgroundColor: SecondryColor,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          content: SingleChildScrollView(
+            child: Form(
+              child: Container(
+                height: MediaQuery.of(context).size.height * .5,
+                width: MediaQuery.of(context).size.width * .5,
+                decoration: BoxDecoration(
+                  color: SecondryColor,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ListTile(
+                      title: TextFormField(
+                        controller: englishName,
+                        style: TextStyle(color: PrimaryColor),
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                          hintText: lang == 'ar'
+                              ? getLang(context, "ProductinEnglish")
+                              : getLang(context, "ProductinEnglish"),
+                          hintStyle: TextStyle(
+                              color: PrimaryColor,
+                              letterSpacing: 0,
+                              fontSize: 10),
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      title: TextFormField(
+                        controller: arabicName,
+                        style: TextStyle(color: PrimaryColor),
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                          hintText: lang == 'ar'
+                              ? getLang(context, "ProductinArabic")
+                              : getLang(context, "ProductinArabic"),
+                          hintStyle: TextStyle(
+                              color: PrimaryColor,
+                              letterSpacing: 0,
+                              fontSize: 10),
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      title: TextFormField(
+                        controller: price,
+                        keyboardType: TextInputType.phone,
+                        style: TextStyle(color: PrimaryColor),
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                          hintText: lang == 'ar'
+                              ? getLang(context, "price")
+                              : getLang(context, "price"),
+                          hintStyle: TextStyle(
+                              color: PrimaryColor,
+                              letterSpacing: 0,
+                              fontSize: 10),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        await addProduct(getStoreID['storeID'].toString(),
+                            englishName.text, arabicName.text, price.text);
+                        setState(() {
+                          Navigator.of(context).pop();
+
+                          _getData().then((productsList) {
+                            setState(() {
+                              products = productsList;
+                            });
+                          });
+                        });
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * .05,
+                        width: MediaQuery.of(context).size.width * .4,
+                        decoration: BoxDecoration(
+                            color: PrimaryColor,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        child: Center(
+                            child: Text(
+                          getLang(context, "InfoSaveBottn"),
+                          style: TextStyle(
+                              color: SecondryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                        )),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          )),
+    );
+  }
 }
 
-Container SlideContiner(IconData icon, Color color, String txt) {
+Container slideContiner(IconData icon, Color color, String txt) {
   return Container(
     margin: EdgeInsets.only(left: 5, right: 5),
     decoration:

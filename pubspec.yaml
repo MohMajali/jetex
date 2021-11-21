@@ -55,7 +55,7 @@ dev_dependencies:
 flutter_icon:
   android: true
   ios: true
-  image_path: "assets/image/jetta-02.png"
+  image_path: "assets/image/jetexorange01.jpg"
 
 # The following section is specific to Flutter.
 flutter:
