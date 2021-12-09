@@ -1,4 +1,4 @@
-#Wed Nov 17 11:37:20 EET 2021
+#Tue Nov 23 10:43:19 EET 2021
 base.0=D\:\\digiFrameflutter\\jetex\\jet-main\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

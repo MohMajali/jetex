@@ -405,6 +405,7 @@ class _EditProductState extends State<EditProduct> {
         mainCat = categoriesList;
       });
     });
+
     proID = sharedPreferences.getInt('selectedProductID');
 
     _getData(proID).then((productsList) {
