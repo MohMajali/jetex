@@ -84,5 +84,6 @@
   "OrderNumber" : "رقم الطلب",
   "warranty" : "كفالة",
   "modelNumber" : "رقم المنتج",
-  "brand" : "وكالة"
+  "brand" : "وكالة",
+  "ShippedOut":"شُحنت"
 }

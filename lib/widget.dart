@@ -6,6 +6,7 @@ import 'package:jettaexstores/config/Constant.dart';
 Widget ProdcutsBoxs(context, String boxname, String rout) {
   return GestureDetector(
     onTap: () {
+      Navigator.of(context).pop();
       Navigator.pushNamed(context, rout);
     },
     child: Container(

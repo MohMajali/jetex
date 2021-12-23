@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1082949000823",
+    "project_id": "jettaex-70842",
+    "storage_bucket": "jettaex-70842.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082949000823:android:2706a6688900bb37def072",
+        "android_client_info": {
+          "package_name": "com.example.jetedit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082949000823-32l0ackp66288r5ksmrmcm6l8vc7u9qm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jetedit",
+            "certificate_hash": "bb180454aba79308c50440675174dc502551482d"
+          }
+        },
+        {
+          "client_id": "1082949000823-aiqu1qjare6n6k51love5v7b52bbcugi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDONLyevM31S2uYHuyYvQUdP4Eo2AfJoeM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082949000823-aiqu1qjare6n6k51love5v7b52bbcugi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

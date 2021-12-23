@@ -14,6 +14,7 @@ import 'package:jettaexstores/Module/productImage.dart';
 import 'package:jettaexstores/Module/productjson.dart';
 import 'package:jettaexstores/Module/brand.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
+import 'package:jettaexstores/Screens/ProdcutDitalScreen.dart';
 import 'package:jettaexstores/config/Configers.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/main.dart';
@@ -440,17 +441,27 @@ class _EditProductState extends State<EditProduct> {
     return Scaffold(
         backgroundColor: PrimaryColor,
         appBar: AppBar(
-            foregroundColor: SecondryColor,
-            backgroundColor: PrimaryColor,
-            title: lang == 'ar'
-                ? Text(getLang(context, "EditProduct"),
-                    style: TextStyle(
-                      color: SecondryColor,
-                    ))
-                : Text(getLang(context, "EditProduct"),
-                    style: TextStyle(
-                      color: SecondryColor,
-                    ))),
+          foregroundColor: SecondryColor,
+          backgroundColor: PrimaryColor,
+          title: lang == 'ar'
+              ? Text(getLang(context, "EditProduct"),
+                  style: TextStyle(
+                    color: SecondryColor,
+                  ))
+              : Text(getLang(context, "EditProduct"),
+                  style: TextStyle(
+                    color: SecondryColor,
+                  )),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProscutDitalScreen()),
+                );
+              },
+              icon: Icon(Icons.arrow_back)),
+        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

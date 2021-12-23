@@ -83,8 +83,6 @@
   "OrderNumber" : "Order Number",
   "warranty" : "Warranty",
   "modelNumber" : "Model Number",
-  "brand" : "Brand"
-
-
-
+  "brand" : "Brand",
+  "ShippedOut" : "Shipped Out"
 }

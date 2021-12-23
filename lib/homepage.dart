@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                         3.5,
                     child: _image == null
                         ? Image.network(
-                            'http://45.76.132.167/storelogos/' +
+                            'https://jettaex.net/storelogos/' +
                                 sharedPreferences.getString('storeLogo'),
                             fit: BoxFit.cover,
                             loadingBuilder: (BuildContext context, Widget child,

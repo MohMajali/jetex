@@ -3,9 +3,11 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
+import 'package:jettaexstores/Widget/NavBar.dart';
 import 'package:jettaexstores/config/Configers.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:http/http.dart' as http;
+import 'package:jettaexstores/homepage.dart';
 import 'package:jettaexstores/orderApi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
@@ -16,20 +18,14 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
-  int pending = 0;
-  int statusPreparing = 1;
-  int statusReady = 2;
-  int statusShipping = 3;
-  int statusCollecting = 4;
-  int statusDone = 5;
-  int statusCanceled = 6;
-  int statusRejected = 7;
-  int selectedIndex = 0;
+  int pending = 1;
+  int statusReady = 4;
+  int statusShipping = 5;
   dynamic storeData;
 
-  List<Orderapi> infos = [];
+  List<OrderItem> infos = [];
 
-  Future<List<Orderapi>> _getData(int status) async {
+  Future<List<OrderItem>> _getData(int status) async {
     //int status;
     var getStoreID = {"storeID": sharedPreferences.getString("storeID")};
     String url = Api.getOrders +
@@ -42,12 +38,12 @@ class _OrderScreenState extends State<OrderScreen> {
     );
 
     if (response.statusCode == 200) {
-      final List<Orderapi> orderList = orderapiFromJson(response.body);
+      final List<OrderItem> orderList = orderItemFromJson(response.body);
 
       return orderList;
     } else {
       // ignore: deprecated_member_use
-      return List<Orderapi>();
+      return List<OrderItem>();
     }
   }
 
@@ -71,6 +67,15 @@ class _OrderScreenState extends State<OrderScreen> {
         backgroundColor: PrimaryColor,
         title: Text(getLang(context, 'Orderbar'),
             style: TextStyle(color: SecondryColor)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Home()),
+              );
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -93,18 +98,13 @@ class _OrderScreenState extends State<OrderScreen> {
                     Row(
                       children: [
                         statuemethod(pending, getLang(context, 'pending')),
-                        statuemethod(
-                            statusPreparing, getLang(context, 'Preparing')),
+
                         statuemethod(statusReady, getLang(context, 'Ready')),
                         statuemethod(
-                            statusShipping, getLang(context, 'Shipping')),
-                        statuemethod(
-                            statusCollecting, getLang(context, 'Collecting')),
-                        statuemethod(statusDone, getLang(context, 'Done')),
-                        statuemethod(
-                            statusRejected, getLang(context, 'Rejected')),
-                        statuemethod(
-                            statusCanceled, getLang(context, 'Caneled')),
+                            statusShipping, getLang(context, 'ShippedOut')),
+
+                        // statuemethod(
+                        //     statusRejected, getLang(context, 'Rejected')),
                       ],
                     ),
                   ],
@@ -117,7 +117,7 @@ class _OrderScreenState extends State<OrderScreen> {
             width: MediaQuery.of(context).size.height * .9,
             child: ListView.builder(
               itemBuilder: (context, int index) {
-                Orderapi order = infos[index];
+                OrderItem order = infos[index];
                 return InkWell(
                   onTap: () {
                     showModalBottomSheet(
@@ -149,18 +149,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: PrimaryColor)),
-                                    trailing: Text("Potato",
-                                        style: TextStyle(
-                                          color: PrimaryColor,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                  ),
-                                  ListTile(
-                                    title: Text('اسم المنتج',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: PrimaryColor)),
-                                    trailing: Text("يطاطا",
+                                    trailing: Text(order.nameEn,
                                         style: TextStyle(
                                           color: PrimaryColor,
                                           fontWeight: FontWeight.bold,
@@ -171,29 +160,31 @@ class _OrderScreenState extends State<OrderScreen> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: PrimaryColor)),
-                                    trailing: Text(" \$ 30",
+                                    trailing:
+                                        Text(order.price.toString() + ' JOD',
+                                            style: TextStyle(
+                                              color: PrimaryColor,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                  ),
+                                  ListTile(
+                                    title: Text('Quantity',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: PrimaryColor)),
+                                    trailing: Text(order.quantity.toString(),
                                         style: TextStyle(
                                           color: PrimaryColor,
                                           fontWeight: FontWeight.bold,
                                         )),
                                   ),
                                   ListTile(
-                                    title: Text('Pay Way',
+                                    title: Text('Total price',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: PrimaryColor)),
-                                    trailing: Text("Cash",
-                                        style: TextStyle(
-                                          color: PrimaryColor,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                  ),
-                                  ListTile(
-                                    title: Text('Shipment Way',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: PrimaryColor)),
-                                    trailing: Text("Car",
+                                    trailing: Text(
+                                        order.totalPrice.toString() + ' JOD',
                                         style: TextStyle(
                                           color: PrimaryColor,
                                           fontWeight: FontWeight.bold,
@@ -211,87 +202,129 @@ class _OrderScreenState extends State<OrderScreen> {
                     decoration: BoxDecoration(
                         color: PrimaryColor,
                         borderRadius: BorderRadius.circular(5)),
-                    child: ListTile(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 5, vertical: 0),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.check),
-                            color: SecondryColor,
-                            onPressed: () async {
-                              var id = order.id.toString();
-                              if (order.status == 0) {
-                                await updateStatus(id, statusPreparing);
+                    child: order.status == 5
+                        ? ListTile(
+                            leading: Image(
+                                image: NetworkImage(Api.img + order.image)),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 0),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(order.status.toString()),
+                                // IconButton(
+                                //   icon: const Icon(Icons.check),
+                                //   color: SecondryColor,
+                                //   onPressed: () async {
+                                //     var id = order.itemsId.toString();
+                                //     if (order.status == 1) {
+                                //       await updateStatus(id, statusReady);
 
-                                await _getData(pending).then((orderList) {
-                                  return infos = orderList;
-                                });
-                                setState(() {});
-                              } else if (order.status == 1) {
-                                await updateStatus(id, statusReady);
+                                //       await _getData(pending).then((orderList) {
+                                //         return infos = orderList;
+                                //       });
+                                //       setState(() {});
+                                //     } else if (order.status == 4) {
+                                //       await updateStatus(id, statusShipping);
 
-                                await _getData(statusPreparing)
-                                    .then((orderList) {
-                                  return infos = orderList;
-                                });
-                                setState(() {});
-                              } else if (order.status == 2) {
-                                await updateStatus(id, statusShipping);
+                                //       await _getData(statusReady).then((orderList) {
+                                //         return infos = orderList;
+                                //       });
+                                //       setState(() {});
+                                //     }
+                                //   },
+                                // ),
+                                // IconButton(
+                                //     onPressed: () async {
+                                //       // var id = order.itemsId.toString();
+                                //       // if (order.status == 0) {
+                                //       //   await updateStatus(id, statusRejected);
+                                //       //   await _getData(pending).then((orderList) {
+                                //       //     return infos = orderList;
+                                //       //   });
+                                //       //   setState(() {});
+                                //       // } else if (order.status == 3) {
+                                //       //   await updateStatus(id, statusCanceled);
+                                //       //   await _getData(pending).then((orderList) {
+                                //       //     return infos = orderList;
+                                //       //   });
+                                //       //   setState(() {});
+                                //       // }
+                                //     },
+                                //     icon: const Icon(
+                                //       Icons.cancel,
+                                //       color: SecondryColor,
+                                //     ))
+                              ],
+                            ),
+                            title: Text(
+                              order.nameEn.toString(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: SecondryColor),
+                            ),
+                          )
+                        : ListTile(
+                            leading: Image(
+                                image: NetworkImage(Api.img + order.image)),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 0),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.check),
+                                  color: SecondryColor,
+                                  onPressed: () async {
+                                    var id = order.itemsId.toString();
+                                    if (order.status == 1) {
+                                      await updateStatus(id, statusReady);
 
-                                await _getData(statusReady).then((orderList) {
-                                  return infos = orderList;
-                                });
-                                setState(() {});
-                              } else if (order.status == 3) {
-                                await updateStatus(id, statusCollecting);
+                                      await _getData(pending).then((orderList) {
+                                        return infos = orderList;
+                                      });
+                                      setState(() {});
+                                    } else if (order.status == 4) {
+                                      await updateStatus(id, statusShipping);
 
-                                await _getData(statusShipping)
-                                    .then((orderList) {
-                                  return infos = orderList;
-                                });
-                                setState(() {});
-                              } else if (order.status == 4) {
-                                await updateStatus(id, statusDone);
-
-                                await _getData(statusCollecting)
-                                    .then((orderList) {
-                                  return infos = orderList;
-                                });
-                                setState(() {});
-                              }
-                            },
+                                      await _getData(statusReady)
+                                          .then((orderList) {
+                                        return infos = orderList;
+                                      });
+                                      setState(() {});
+                                    }
+                                  },
+                                ),
+                                IconButton(
+                                    onPressed: () async {
+                                      // var id = order.itemsId.toString();
+                                      // if (order.status == 0) {
+                                      //   await updateStatus(id, statusRejected);
+                                      //   await _getData(pending).then((orderList) {
+                                      //     return infos = orderList;
+                                      //   });
+                                      //   setState(() {});
+                                      // } else if (order.status == 3) {
+                                      //   await updateStatus(id, statusCanceled);
+                                      //   await _getData(pending).then((orderList) {
+                                      //     return infos = orderList;
+                                      //   });
+                                      //   setState(() {});
+                                      // }
+                                    },
+                                    icon: const Icon(
+                                      Icons.cancel,
+                                      color: SecondryColor,
+                                    ))
+                              ],
+                            ),
+                            title: Text(
+                              order.nameEn.toString(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: SecondryColor),
+                            ),
                           ),
-                          IconButton(
-                              onPressed: () async {
-                                var id = order.id.toString();
-                                if (order.status == 0) {
-                                  await updateStatus(id, statusRejected);
-                                  await _getData(pending).then((orderList) {
-                                    return infos = orderList;
-                                  });
-                                  setState(() {});
-                                } else if (order.status == 3) {
-                                  await updateStatus(id, statusCanceled);
-                                  await _getData(pending).then((orderList) {
-                                    return infos = orderList;
-                                  });
-                                  setState(() {});
-                                }
-                              },
-                              icon: const Icon(
-                                Icons.cancel,
-                                color: SecondryColor,
-                              ))
-                        ],
-                      ),
-                      title: Text(
-                        getLang(context,"OrderNumber")+": "+ order.orderNumber.toString(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: SecondryColor),
-                      ),
-                    ),
                   ),
                 );
               },
@@ -324,7 +357,7 @@ class _OrderScreenState extends State<OrderScreen> {
           margin: EdgeInsets.all(5),
           decoration: BoxDecoration(
               color: co, borderRadius: BorderRadiusDirectional.circular(5)),
-          height: 40,
+          height: 50,
           width: 65,
           child: Text(
             st,

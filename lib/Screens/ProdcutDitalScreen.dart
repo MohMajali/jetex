@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/productlastapi.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
+import 'package:jettaexstores/Widget/NavBar.dart';
 import 'package:jettaexstores/alertdilog.dart';
 import 'package:jettaexstores/config/Configers.dart';
 import 'package:jettaexstores/config/Constant.dart';
+import 'package:jettaexstores/homepage.dart';
 import 'package:jettaexstores/main.dart';
 import 'package:http/http.dart' as http;
 
@@ -94,6 +96,15 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
           backgroundColor: PrimaryColor,
           title: Text(getLang(context, "ProductButton"),
               style: TextStyle(color: SecondryColor)),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()),
+                );
+              },
+              icon: Icon(Icons.arrow_back)),
         ),
         backgroundColor: SecondryColor,
         body: ListView.builder(
@@ -112,6 +123,7 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
                       onTap: () {
                         sharedPreferences.setInt(
                             'selectedProductID', productsApi.id);
+                        Navigator.of(context).pop();
                         Navigator.pushNamed(context, 'EditProduct', arguments: {
                           "id": productsApi.id,
                           "namear": productsApi.nameAr,

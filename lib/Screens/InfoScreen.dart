@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/mainscreeninfo.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
+import 'package:jettaexstores/Widget/NavBar.dart';
 import 'package:jettaexstores/config/Configers.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/main.dart';
@@ -60,6 +61,15 @@ class _InfoScreenState extends State<InfoScreen> {
         backgroundColor: PrimaryColor,
         title: Text(getLang(context, "Infobar"),
             style: TextStyle(color: SecondryColor)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Home()),
+              );
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       body: ListView.builder(
         itemBuilder: (context, int index) {
@@ -486,6 +496,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       onTap: () async {
                         await update(getStore, en.text);
                         setState(() {
+                          sharedPreferences.remove("storeNameEn");
                           sharedPreferences.setString('storeNameEn', en.text);
 
                           Navigator.of(context).pop();

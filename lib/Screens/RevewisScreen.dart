@@ -5,9 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/reviewapi.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
+import 'package:jettaexstores/Widget/NavBar.dart';
 import 'package:jettaexstores/Widget/review.dart';
 import 'package:jettaexstores/config/Configers.dart';
 import 'package:jettaexstores/config/Constant.dart';
+import 'package:jettaexstores/homepage.dart';
 import 'package:jettaexstores/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -84,6 +86,15 @@ class _RevewiesScreenState extends State<RevewiesScreen> {
         backgroundColor: PrimaryColor,
         title: Text(getLang(context, "Reviewbar"),
             style: TextStyle(color: SecondryColor)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Home()),
+              );
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       backgroundColor: SecondryColor,
       body: ListView.builder(
