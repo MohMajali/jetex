@@ -1,5 +1,5 @@
 class Api {
-  static const String api = "http://45.76.132.167:80/api";
+  // static const String api = "http://45.76.132.167:80/api";
   static const String login_api =
       "https://jettaex.net/api/authentication/Login.php";
   static const String getInfo =
@@ -80,9 +80,38 @@ class Api {
       'https://jettaex.net/api/authentication/deleteSecondryImage.php';
   static const String deleteColor =
       'https://jettaex.net/api/authentication/deleteColor.php';
+  static const String updateLogo =
+      'https://jettaex.net/api/authentication/UpdateLogo.php';
+  static const String deleteLogo =
+      'https://jettaex.net/api/authentication/deleteLogo.php';
+  static const String getNotes =
+      'https://jettaex.net/api/authentication/notification.php?storeID=';
+  static const String getTypes =
+      'https://jettaex.net/api/authentication/pages.php';
+  static const String getDepartments =
+      'https://jettaex.net/api/authentication/pagedepartments.php?type_id=';
+  static const String getMainCat =
+      'https://jettaex.net/api/authentication/getMainCat.php?proId=';
+  static const String getSubCat =
+      'https://jettaex.net/api/authentication/getSub1Cat.php?proId=';
+  static const String getSub2Cat =
+      'https://jettaex.net/api/authentication/getSub2.php?proId=';
+  static const String getSub3Cat =
+      'https://jettaex.net/api/authentication/getSub3Cat.php?proId=';
+  static const String getBrand =
+      'https://jettaex.net/api/authentication/getBrand.php?proId=';
+  static const String insertSub1 =
+      'https://jettaex.net/api/authentication/insertSub1.php';
+  static const String getColors =
+      'https://jettaex.net/api/authentication/orderColor.php?store_id=';
+  static const String getShipped =
+      'https://jettaex.net/api/authentication/statusShipped.php?store_id=';
   //------------------------------------------------------------//
   //images
+
   static const String img = 'https://jettaex.net/productImages/';
+  static const String userimg = 'https://jettaex.net/UserProfileImage/';
   static const String imageUrl = 'https://jettaex.net/productImages/';
   static const String colorUrl = 'https://jettaex.net/productcolors/';
+  static const String storeLogo = 'https://jettaex.net/storelogos/';
 }

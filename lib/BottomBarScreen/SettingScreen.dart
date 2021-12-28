@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:jettaexstores/Module/types.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/Screens/LoginScreen.dart';
+import 'package:jettaexstores/Screens/types.dart';
 import 'package:jettaexstores/config/Constant.dart';
 import 'package:jettaexstores/main.dart';
+import 'package:http/http.dart' as http;
 
-class SettingScreen extends StatelessWidget {
+class SetteingScreen extends StatefulWidget {
+  const SetteingScreen({Key key}) : super(key: key);
+
+  @override
+  _SetteingScreenState createState() => _SetteingScreenState();
+}
+
+class _SetteingScreenState extends State<SetteingScreen> {
   var lang = sharedPreferences.getString("lang");
+  List<Types> types;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,92 +45,138 @@ class SettingScreen extends StatelessWidget {
             Card(
               elevation: 8,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32),
+                borderRadius: BorderRadius.circular(0),
               ),
-              color: SecondryColor,
+              color: PrimaryColor,
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              'Language || اللغة ',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: PrimaryColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              //   textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ],
+                    InkWell(
+                      onTap: () {
+                        print(lang);
+                        lang == "en"
+                            ? MyApp.setLocale(context, Locale("ar", ""))
+                            : MyApp.setLocale(context, Locale("en", ""));
+                        setState(() {
+                          lang == "en" ? lang = "ar" : lang = "en";
+                        });
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 8),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: SecondryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(0))),
+                        child: Center(
+                            child: lang == "en"
+                                ? Text(
+                                    'العربية',
+                                    style: TextStyle(
+                                        color: PrimaryColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  )
+                                : Text(
+                                    'English',
+                                    style: TextStyle(
+                                        color: PrimaryColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  )),
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            if (lang.toString() == "en") {
-                              MyApp.setLocale(context, Locale("en", ""));
-                            } else {
-                              MyApp.setLocale(context, Locale("en", ""));
-                            }
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 8),
-                            height: MediaQuery.of(context).size.height * .05,
-                            width: MediaQuery.of(context).size.width * .4,
-                            decoration: BoxDecoration(
-                                color: PrimaryColor,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                            child: Center(
-                                child: Text(
-                              'English',
-                              style: TextStyle(
-                                  color: SecondryColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            )),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 8),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: SecondryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(0))),
+                        child: Center(
+                            child: Text(
+                          getLang(context, "AppDevlopment"),
+                          style: TextStyle(
+                              color: PrimaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        )),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 8),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: SecondryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(0))),
+                        child: Center(
+                            child: Text(
+                          getLang(context, "settingcontactbun"),
+                          style: TextStyle(
+                              color: PrimaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        )),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TypesScreen()),
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 8),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: SecondryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(0))),
+                        child: Center(
+                            child: Text(
+                          getLang(context, "Terms&Conditions"),
+                          style: TextStyle(
+                              color: PrimaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        )),
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+                      margin: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+                      decoration: BoxDecoration(
+                          color: SecondryColor,
+                          borderRadius: BorderRadius.circular(0)),
+                      child: ListTile(
+                        title: Text(
+                          getLang(context, "Logout"),
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: PrimaryColor,
+                            fontWeight: FontWeight.bold,
                           ),
+                          textAlign: TextAlign.center,
                         ),
-                        InkWell(
-                          onTap: () {
-                            if (lang.toString() != "ar") {
-                              MyApp.setLocale(context, Locale("ar", ""));
-                            } else {
-                              MyApp.setLocale(context, Locale("ar", ""));
-                            }
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 8),
-                            height: MediaQuery.of(context).size.height * .05,
-                            width: MediaQuery.of(context).size.width * .4,
-                            decoration: BoxDecoration(
-                                color: PrimaryColor,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                            child: Center(
-                                child: Text(
-                              'العربية',
-                              style: TextStyle(
-                                  color: SecondryColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            )),
-                          ),
-                        )
-                      ],
+                        onTap: () {
+                          sharedPreferences.clear();
+                          sharedPreferences.setBool("Remember", false);
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()));
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -123,117 +185,8 @@ class SettingScreen extends StatelessWidget {
             SizedBox(
               height: 8,
             ),
-            Card(
-              elevation: 8,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32),
-              ),
-              color: SecondryColor,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              getLang(context, "AboutUs"),
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: PrimaryColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 8),
-                            height: MediaQuery.of(context).size.height * .05,
-                            width: MediaQuery.of(context).size.width * .4,
-                            decoration: BoxDecoration(
-                                color: PrimaryColor,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                            child: Center(
-                                child: Text(
-                              getLang(context, "AppDevlopment"),
-                              style: TextStyle(
-                                  color: SecondryColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            )),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 8),
-                            height: MediaQuery.of(context).size.height * .05,
-                            width: MediaQuery.of(context).size.width * .4,
-                            decoration: BoxDecoration(
-                                color: PrimaryColor,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                            child: Center(
-                                child: Text(
-                              getLang(context, "settingcontactbun"),
-                              style: TextStyle(
-                                  color: SecondryColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
             SizedBox(
-              height: 100,
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 12, vertical: 35),
-              decoration: BoxDecoration(
-                  color: SecondryColor,
-                  borderRadius: BorderRadius.circular(30)),
-              child: ListTile(
-                title: Text(
-                  getLang(context, "Logout"),
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: PrimaryColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                leading: Icon(
-                  Icons.logout,
-                  color: PrimaryColor,
-                ),
-                onTap: () {
-                  sharedPreferences.clear();
-                  sharedPreferences.setBool("Remember", false);
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
-                },
-              ),
+              height: 10,
             ),
           ],
         ),

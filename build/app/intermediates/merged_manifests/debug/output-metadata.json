@@ -4,7 +4,7 @@
     "type": "MERGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "net.jettaex",
+  "applicationId": "com.example.jetedit",
   "variantName": "debug",
   "elements": [
     {

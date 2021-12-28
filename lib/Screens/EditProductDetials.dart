@@ -9,10 +9,15 @@ import 'package:jettaexstores/Module/Colors.dart';
 import 'package:jettaexstores/Module/Sub2Category.dart';
 import 'package:jettaexstores/Module/Sub3Category.dart';
 import 'package:jettaexstores/Module/Subcategory.dart';
+import 'package:jettaexstores/Module/brandspro.dart';
 import 'package:jettaexstores/Module/categoryapi.dart';
+import 'package:jettaexstores/Module/maincar.dart';
 import 'package:jettaexstores/Module/productImage.dart';
 import 'package:jettaexstores/Module/productjson.dart';
 import 'package:jettaexstores/Module/brand.dart';
+import 'package:jettaexstores/Module/sub2cat.dart';
+import 'package:jettaexstores/Module/sub3cat.dart';
+import 'package:jettaexstores/Module/subcat.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
 import 'package:jettaexstores/Screens/ProdcutDitalScreen.dart';
 import 'package:jettaexstores/config/Configers.dart';
@@ -43,6 +48,11 @@ class _EditProductState extends State<EditProduct> {
   List<Sub2Category> sub2Cat = [];
   List<Sub3Category> sub3Cat = [];
   List<Brands> brand = [];
+  List<MainCat> mainCateg = [];
+  List<SubCat> subCateg = [];
+  List<Sub2Cat> sub2Categ = [];
+  List<Sub3Cat> sub3Categ = [];
+  List<Brandspro> brandpro = [];
   dynamic storeData;
   String value;
   String _cat;
@@ -107,8 +117,6 @@ class _EditProductState extends State<EditProduct> {
   }
 
   Future<List<ProductsApi>> _getData(int id) async {
-    var getStoreID = {"storeID": sharedPreferences.getString("storeID")};
-
     String url = Api.productViewEdit + id.toString();
 
     var response = await http.get(Uri.parse(url));
@@ -128,6 +136,20 @@ class _EditProductState extends State<EditProduct> {
 
     var json = jsonDecode(response.body);
 
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
     return true;
   }
 
@@ -136,7 +158,20 @@ class _EditProductState extends State<EditProduct> {
         body: {"id": id.toString(), "warranty": warranty});
 
     var json = jsonDecode(response.body);
-    print(json);
+
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
     return true;
   }
 
@@ -145,7 +180,20 @@ class _EditProductState extends State<EditProduct> {
         body: {"id": id.toString(), "model_number": Model});
 
     var json = jsonDecode(response.body);
-    print(json);
+
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
 
     return true;
   }
@@ -154,12 +202,44 @@ class _EditProductState extends State<EditProduct> {
     final response = await http.post(Uri.parse(Api.updateDiscount),
         body: {"id": id.toString(), "discount": discount.toString()});
 
+    var json = jsonDecode(response.body);
+
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
     return true;
   }
 
   Future<bool> updateAName(var id, String name_ar) async {
     final response = await http.post(Uri.parse(Api.updateProAName),
         body: {"id": id.toString(), "name_ar": name_ar});
+
+    var json = jsonDecode(response.body);
+
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
 
     return true;
   }
@@ -168,12 +248,44 @@ class _EditProductState extends State<EditProduct> {
     final response = await http.post(Uri.parse(Api.updateProADesc),
         body: {"id": id.toString(), "description_ar": ARDesc});
 
+    var json = jsonDecode(response.body);
+
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
     return true;
   }
 
-  Future<bool> updateEDesc(var id, String EDesc) async {
+  Future<bool> updateEDesc(var id, String eDesc) async {
     final response = await http.post(Uri.parse(Api.updateProEDesc),
-        body: {"id": id.toString(), "description_en": EDesc.toString()});
+        body: {"id": id.toString(), "description_en": eDesc.toString()});
+
+    var json = jsonDecode(response.body);
+
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
 
     return true;
   }
@@ -201,6 +313,22 @@ class _EditProductState extends State<EditProduct> {
     String url = Api.updatePrice;
     final response = await http.post(Uri.parse(url),
         body: {"id": id.toString(), "price": price.toString()});
+
+    var json = jsonDecode(response.body);
+
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   Future insertColors(int productId, String color, String colorDecode) async {
@@ -294,6 +422,66 @@ class _EditProductState extends State<EditProduct> {
     }
   }
 
+  Future<List<MainCat>> _getMaincat(var proid) async {
+    String url = Api.getMainCat + proID.toString();
+
+    var response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final List<MainCat> categoriesList = mainCatFromJson(response.body);
+
+      return categoriesList;
+    } else {
+      // ignore: deprecated_member_use
+      return List<MainCat>();
+    }
+  }
+
+  Future<List<SubCat>> _getSubcat(var proid) async {
+    String url = Api.getSubCat + proID.toString();
+
+    var response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final List<SubCat> subCategoriesList = subCatFromJson(response.body);
+
+      return subCategoriesList;
+    } else {
+      // ignore: deprecated_member_use
+      return List<SubCat>();
+    }
+  }
+
+  Future<List<Sub2Cat>> _getSub2cat(var proid) async {
+    String url = Api.getSub2Cat + proID.toString();
+
+    var response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final List<Sub2Cat> sub2CategoriesList = sub2CatFromJson(response.body);
+
+      return sub2CategoriesList;
+    } else {
+      // ignore: deprecated_member_use
+      return List<Sub2Cat>();
+    }
+  }
+
+  Future<List<Sub3Cat>> _getSub3cat(var proid) async {
+    String url = Api.getSub3Cat + proID.toString();
+
+    var response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final List<Sub3Cat> sub3CategoriesList = sub3CatFromJson(response.body);
+
+      return sub3CategoriesList;
+    } else {
+      // ignore: deprecated_member_use
+      return List<Sub3Cat>();
+    }
+  }
+
   Future<List<SubCategory>> _getSubCategory(var Cat_id) async {
     String url = Api.getSubCategories + Cat_id.toString();
 
@@ -307,6 +495,21 @@ class _EditProductState extends State<EditProduct> {
     } else {
       // ignore: deprecated_member_use
       return List<SubCategory>();
+    }
+  }
+
+  Future<List<Brandspro>> _getBrand(var proid) async {
+    String url = Api.getBrand + proID.toString();
+
+    var response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final List<Brandspro> brandList = brandsproFromJson(response.body);
+
+      return brandList;
+    } else {
+      // ignore: deprecated_member_use
+      return List<Brandspro>();
     }
   }
 
@@ -346,6 +549,22 @@ class _EditProductState extends State<EditProduct> {
     String url = Api.insertMainCategory;
     final response = await http.post(Uri.parse(url),
         body: {"id": id.toString(), "newCatID": newCat.toString()});
+
+    var json = jsonDecode(response.body);
+
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   Future insertBrand(int id, var brand) async {
@@ -355,21 +574,69 @@ class _EditProductState extends State<EditProduct> {
   }
 
   Future insertSub1(int id, var newSub1) async {
-    String url = 'http://45.76.132.167/api/authentication/insertSub1.php';
+    String url = Api.insertSub1;
     final response = await http.post(Uri.parse(url),
         body: {"id": id.toString(), "newSub1CatID": newSub1.toString()});
+
+    var json = jsonDecode(response.body);
+
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   Future insertSub2(int id, var newSub2) async {
     String url = Api.insertsub2Category;
     final response = await http.post(Uri.parse(url),
         body: {"id": id.toString(), "newSub2CatID": newSub2.toString()});
+
+    var json = jsonDecode(response.body);
+
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   Future insertSub3(int id, var newSub3) async {
     String url = Api.insertsub3Category;
     final response = await http.post(Uri.parse(url),
         body: {"id": id.toString(), "newSub3CatID": newSub3.toString()});
+
+    var json = jsonDecode(response.body);
+
+    print(json['error']);
+
+    if (!json['error']) {
+      final snackBar = SnackBar(
+        content: Text(
+          json['message'].toString(),
+          style: TextStyle(color: PrimaryColor),
+        ),
+        action: SnackBarAction(label: '', onPressed: () {}),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   Future deleteSecondryImage(int id) async {
@@ -430,6 +697,37 @@ class _EditProductState extends State<EditProduct> {
     _getBrands().then((brandList) {
       brand = brandList;
     });
+
+    _getMaincat(proID).then((categoriesList) {
+      setState(() {
+        mainCateg = categoriesList;
+      });
+    });
+
+    _getSubcat(proID).then((subCategoriesList) {
+      setState(() {
+        subCateg = subCategoriesList;
+        print(subCateg.length);
+      });
+    });
+
+    _getSub2cat(proID).then((sub2CategoriesList) {
+      setState(() {
+        sub2Categ = sub2CategoriesList;
+      });
+    });
+
+    _getSub3cat(proID).then((sub3CategoriesList) {
+      setState(() {
+        sub3Categ = sub3CategoriesList;
+      });
+    });
+
+    _getBrand(proID).then((brandList) {
+      setState(() {
+        brandpro = brandList;
+      });
+    });
   }
 
   @override
@@ -443,15 +741,10 @@ class _EditProductState extends State<EditProduct> {
         appBar: AppBar(
           foregroundColor: SecondryColor,
           backgroundColor: PrimaryColor,
-          title: lang == 'ar'
-              ? Text(getLang(context, "EditProduct"),
-                  style: TextStyle(
-                    color: SecondryColor,
-                  ))
-              : Text(getLang(context, "EditProduct"),
-                  style: TextStyle(
-                    color: SecondryColor,
-                  )),
+          title: Text(getLang(context, "EditProduct"),
+              style: TextStyle(
+                color: SecondryColor,
+              )),
           leading: IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
@@ -490,21 +783,13 @@ class _EditProductState extends State<EditProduct> {
                           children: [
                             Container(
                                 width: MediaQuery.of(context).size.width * .8,
-                                child: lang == 'ar'
-                                    ? Text(
-                                        getLang(context, "MasterImage"),
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: PrimaryColor,
-                                        ),
-                                      )
-                                    : Text(
-                                        getLang(context, "MasterImage"),
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: PrimaryColor,
-                                        ),
-                                      )),
+                                child: Text(
+                                  getLang(context, "MasterImage"),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: PrimaryColor,
+                                  ),
+                                )),
                             Container(
                               width: MediaQuery.of(context).size.width * .1,
                               child: Center(
@@ -698,21 +983,13 @@ class _EditProductState extends State<EditProduct> {
                                 Container(
                                     width:
                                         MediaQuery.of(context).size.width * .8,
-                                    child: lang == 'ar'
-                                        ? Text(
-                                            getLang(context, "ProuctName"),
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              color: PrimaryColor,
-                                            ),
-                                          )
-                                        : Text(
-                                            getLang(context, "ProuctName"),
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              color: PrimaryColor,
-                                            ),
-                                          )),
+                                    child: Text(
+                                      getLang(context, "ProuctName"),
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: PrimaryColor,
+                                      ),
+                                    )),
                               ],
                             ),
                           ),
@@ -820,21 +1097,13 @@ class _EditProductState extends State<EditProduct> {
                                 Container(
                                     width:
                                         MediaQuery.of(context).size.width * .8,
-                                    child: lang == 'ar'
-                                        ? Text(
-                                            getLang(context, "ProductDesc"),
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              color: PrimaryColor,
-                                            ),
-                                          )
-                                        : Text(
-                                            getLang(context, "ProductDesc"),
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              color: PrimaryColor,
-                                            ),
-                                          )),
+                                    child: Text(
+                                      getLang(context, "ProductDesc"),
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: PrimaryColor,
+                                      ),
+                                    )),
                               ],
                             ),
                           ),
@@ -941,21 +1210,13 @@ class _EditProductState extends State<EditProduct> {
                           children: [
                             Container(
                                 width: MediaQuery.of(context).size.width * .8,
-                                child: lang == 'ar'
-                                    ? Text(
-                                        getLang(context, "ProductImages"),
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: PrimaryColor,
-                                        ),
-                                      )
-                                    : Text(
-                                        getLang(context, "ProductImages"),
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: PrimaryColor,
-                                        ),
-                                      )),
+                                child: Text(
+                                  getLang(context, "ProductImages"),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: PrimaryColor,
+                                  ),
+                                )),
                             Container(
                               width: MediaQuery.of(context).size.width * .1,
                               child: Center(
@@ -1072,21 +1333,13 @@ class _EditProductState extends State<EditProduct> {
                           children: [
                             Container(
                                 width: MediaQuery.of(context).size.width * .8,
-                                child: lang == 'ar'
-                                    ? Text(
-                                        getLang(context, "productColors"),
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: PrimaryColor,
-                                        ),
-                                      )
-                                    : Text(
-                                        getLang(context, "productColors"),
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: PrimaryColor,
-                                        ),
-                                      )),
+                                child: Text(
+                                  getLang(context, "productColors"),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: PrimaryColor,
+                                  ),
+                                )),
                             Container(
                               width: MediaQuery.of(context).size.width * .1,
                               child: Center(
@@ -1226,21 +1479,13 @@ class _EditProductState extends State<EditProduct> {
                               children: [
                                 Container(
                                   width: MediaQuery.of(context).size.width * .8,
-                                  child: lang == 'ar'
-                                      ? Text(
-                                          getLang(context, "PriceDiscount"),
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: PrimaryColor,
-                                          ),
-                                        )
-                                      : Text(
-                                          getLang(context, "PriceDiscount"),
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: PrimaryColor,
-                                          ),
-                                        ),
+                                  child: Text(
+                                    getLang(context, "PriceDiscount"),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: PrimaryColor,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -1347,21 +1592,13 @@ class _EditProductState extends State<EditProduct> {
                               children: [
                                 Container(
                                   width: MediaQuery.of(context).size.width * .8,
-                                  child: lang == 'ar'
-                                      ? Text(
-                                          getLang(context, "warranty"),
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: PrimaryColor,
-                                          ),
-                                        )
-                                      : Text(
-                                          getLang(context, "warranty"),
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: PrimaryColor,
-                                          ),
-                                        ),
+                                  child: Text(
+                                    getLang(context, "warranty"),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: PrimaryColor,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -1426,21 +1663,13 @@ class _EditProductState extends State<EditProduct> {
                               children: [
                                 Container(
                                   width: MediaQuery.of(context).size.width * .8,
-                                  child: lang == 'ar'
-                                      ? Text(
-                                          getLang(context, "modelNumber"),
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: PrimaryColor,
-                                          ),
-                                        )
-                                      : Text(
-                                          getLang(context, "modelNumber"),
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: PrimaryColor,
-                                          ),
-                                        ),
+                                  child: Text(
+                                    getLang(context, "modelNumber"),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: PrimaryColor,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -1509,21 +1738,13 @@ class _EditProductState extends State<EditProduct> {
                               children: [
                                 Container(
                                   width: MediaQuery.of(context).size.width * .8,
-                                  child: lang == 'ar'
-                                      ? Text(
-                                          getLang(context, "Categories"),
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: PrimaryColor,
-                                          ),
-                                        )
-                                      : Text(
-                                          getLang(context, "Categories"),
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: PrimaryColor,
-                                          ),
-                                        ),
+                                  child: Text(
+                                    getLang(context, "Categories"),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: PrimaryColor,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -1578,15 +1799,20 @@ class _EditProductState extends State<EditProduct> {
                       color: Colors.black54,
                       fontSize: 16,
                     ),
-                    hint: lang == 'ar'
+                    hint: mainCateg.length == 0
                         ? Text(
                             getLang(context, "MainCategory"),
                             style: TextStyle(color: PrimaryColor),
                           )
-                        : Text(
-                            getLang(context, "MainCategory"),
-                            style: TextStyle(color: PrimaryColor),
-                          ),
+                        : lang == 'ar'
+                            ? Text(
+                                mainCateg[0].nameAr,
+                                style: TextStyle(color: PrimaryColor),
+                              )
+                            : Text(
+                                mainCateg[0].nameEn,
+                                style: TextStyle(color: PrimaryColor),
+                              ),
                     onChanged: (String newValue) {
                       setState(() {
                         _cat = newValue;
@@ -1600,6 +1826,7 @@ class _EditProductState extends State<EditProduct> {
                           });
                         });
                         insertCategory(proID, _cat);
+                        print(mainCateg[0].nameEn);
                       });
                     },
                     items: mainCat.map((category) {
@@ -1644,15 +1871,20 @@ class _EditProductState extends State<EditProduct> {
                       color: Colors.black54,
                       fontSize: 16,
                     ),
-                    hint: lang == 'ar'
+                    hint: brandpro.length == 0
                         ? Text(
                             getLang(context, "brand"),
                             style: TextStyle(color: PrimaryColor),
                           )
-                        : Text(
-                            getLang(context, "brand"),
-                            style: TextStyle(color: PrimaryColor),
-                          ),
+                        : lang == 'ar'
+                            ? Text(
+                                brandpro[0].nameAr,
+                                style: TextStyle(color: PrimaryColor),
+                              )
+                            : Text(
+                                brandpro[0].nameEn,
+                                style: TextStyle(color: PrimaryColor),
+                              ),
                     onChanged: (String newValue) {
                       setState(() {
                         _brand = newValue;
@@ -1688,190 +1920,203 @@ class _EditProductState extends State<EditProduct> {
 
   Container subCategory() {
     return Container(
-      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * .05, 0,
-          MediaQuery.of(context).size.width * .05, 0),
-      color: SecondryColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Expanded(
-            child: DropdownButtonHideUnderline(
-              child: ButtonTheme(
-                alignedDropdown: true,
-                child: DropdownButton<String>(
-                  value: _subCat,
-                  iconSize: 30,
-                  icon: const Icon(Icons.add),
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 16,
-                  ),
-                  hint: lang == 'ar'
-                      ? Text(
-                          getLang(context, "SubCategories"),
-                          style: TextStyle(color: PrimaryColor),
-                        )
-                      : Text(
-                          getLang(context, "SubCategories"),
-                          style: TextStyle(color: PrimaryColor),
-                        ),
-                  onChanged: (String newValue2) {
-                    setState(() {
-                      _subCat = newValue2;
-                      _sub2Cat = null;
-                      _sub3Cat = null;
-                      _getSub2Category(_subCat).then((sub2CategoriesList) {
-                        setState(() {
-                          sub2Cat = sub2CategoriesList;
-                          loadSub = true;
+        padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * .05, 0,
+            MediaQuery.of(context).size.width * .05, 0),
+        color: SecondryColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: DropdownButtonHideUnderline(
+                child: ButtonTheme(
+                  alignedDropdown: true,
+                  child: DropdownButton<String>(
+                    value: _subCat,
+                    iconSize: 30,
+                    icon: const Icon(Icons.add),
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 16,
+                    ),
+                    hint: subCateg.length == 0
+                        ? Text(
+                            getLang(context, "SubCategories"),
+                            style: TextStyle(color: PrimaryColor),
+                          )
+                        : lang == 'ar'
+                            ? Text(
+                                subCateg[0].nameAr,
+                                style: TextStyle(color: PrimaryColor),
+                              )
+                            : Text(
+                                subCateg[0].nameEn,
+                                style: TextStyle(color: PrimaryColor),
+                              ),
+                    onChanged: (String newValue2) {
+                      setState(() {
+                        _subCat = newValue2;
+                        _sub2Cat = null;
+                        _sub3Cat = null;
+                        _getSub2Category(_subCat).then((sub2CategoriesList) {
+                          setState(() {
+                            sub2Cat = sub2CategoriesList;
+                            loadSub = true;
+                          });
                         });
+                        // print(_subCat);
+                        insertSub1(proID, _subCat);
                       });
-                      insertSub1(proID, _subCat);
-                    });
-                  },
-                  items: subCat.map((subCategory) {
-                        return DropdownMenuItem(
-                            value: subCategory.id.toString(),
-                            child: lang == 'ar'
-                                ? Text(
-                                    subCategory.nameAr,
-                                    style: TextStyle(color: Colors.black),
-                                  )
-                                : Text(
-                                    subCategory.nameEn,
-                                    style: TextStyle(color: Colors.black),
-                                  ));
-                      }).toList() ??
-                      [],
+                    },
+                    items: subCat.map((subCategory) {
+                          return DropdownMenuItem(
+                              value: subCategory.id.toString(),
+                              child: lang == 'ar'
+                                  ? Text(
+                                      subCategory.nameAr,
+                                      style: TextStyle(color: Colors.black),
+                                    )
+                                  : Text(
+                                      subCategory.nameEn,
+                                      style: TextStyle(color: Colors.black),
+                                    ));
+                        }).toList() ??
+                        [],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
   }
 
   Container sub2Category() {
     return Container(
-      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * .05, 0,
-          MediaQuery.of(context).size.width * .05, 0),
-      color: SecondryColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Expanded(
-            child: DropdownButtonHideUnderline(
-              child: ButtonTheme(
-                alignedDropdown: true,
-                child: DropdownButton<String>(
-                  value: _sub2Cat,
-                  iconSize: 30,
-                  icon: const Icon(Icons.add),
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 16,
-                  ),
-                  hint: lang == 'ar'
-                      ? Text(
-                          getLang(context, "SubCategories2"),
-                          style: TextStyle(color: PrimaryColor),
-                        )
-                      : Text(
-                          getLang(context, "SubCategories2"),
-                          style: TextStyle(color: PrimaryColor),
-                        ),
-                  onChanged: (String newValue3) {
-                    setState(() {
-                      _sub2Cat = newValue3;
-                      _sub3Cat = null;
-                      _getSub3Category(_sub2Cat).then((sub3CategoriesList) {
-                        setState(() {
-                          sub3Cat = sub3CategoriesList;
-                          loadSub = true;
+        padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * .05, 0,
+            MediaQuery.of(context).size.width * .05, 0),
+        color: SecondryColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: DropdownButtonHideUnderline(
+                child: ButtonTheme(
+                  alignedDropdown: true,
+                  child: DropdownButton<String>(
+                    value: _sub2Cat,
+                    iconSize: 30,
+                    icon: const Icon(Icons.add),
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 16,
+                    ),
+                    hint: sub2Categ.length == 0
+                        ? Text(
+                            getLang(context, "SubCategories2"),
+                            style: TextStyle(color: PrimaryColor),
+                          )
+                        : lang == 'ar'
+                            ? Text(
+                                sub2Categ[0].nameAr,
+                                style: TextStyle(color: PrimaryColor),
+                              )
+                            : Text(
+                                sub2Categ[0].nameEn,
+                                style: TextStyle(color: PrimaryColor),
+                              ),
+                    onChanged: (String newValue3) {
+                      setState(() {
+                        _sub2Cat = newValue3;
+                        _sub3Cat = null;
+                        _getSub3Category(_sub2Cat).then((sub3CategoriesList) {
+                          setState(() {
+                            sub3Cat = sub3CategoriesList;
+                            loadSub = true;
+                          });
                         });
+                        insertSub2(proID, _sub2Cat);
                       });
-                      insertSub2(proID, _sub2Cat);
-                    });
-                  },
-                  items: sub2Cat.map((sub2Category) {
-                        return DropdownMenuItem(
-                            value: sub2Category.id.toString(),
-                            child: lang == 'ar'
-                                ? Text(
-                                    sub2Category.nameAr,
-                                    style: TextStyle(color: Colors.black),
-                                  )
-                                : Text(
-                                    sub2Category.nameEn,
-                                    style: TextStyle(color: Colors.black),
-                                  ));
-                      }).toList() ??
-                      [],
+                    },
+                    items: sub2Cat.map((sub2Category) {
+                          return DropdownMenuItem(
+                              value: sub2Category.id.toString(),
+                              child: lang == 'ar'
+                                  ? Text(
+                                      sub2Category.nameAr,
+                                      style: TextStyle(color: Colors.black),
+                                    )
+                                  : Text(
+                                      sub2Category.nameEn,
+                                      style: TextStyle(color: Colors.black),
+                                    ));
+                        }).toList() ??
+                        [],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
   }
 
   Container sub3Category() {
     return Container(
-      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * .05, 0,
-          MediaQuery.of(context).size.width * .05, 0),
-      color: SecondryColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Expanded(
-            child: DropdownButtonHideUnderline(
-              child: ButtonTheme(
-                alignedDropdown: true,
-                child: DropdownButton<String>(
-                  value: _sub3Cat,
-                  iconSize: 30,
-                  icon: const Icon(Icons.add),
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 16,
+        padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * .05, 0,
+            MediaQuery.of(context).size.width * .05, 0),
+        color: SecondryColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: DropdownButtonHideUnderline(
+                child: ButtonTheme(
+                  alignedDropdown: true,
+                  child: DropdownButton<String>(
+                    value: _sub3Cat,
+                    iconSize: 30,
+                    icon: const Icon(Icons.add),
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 16,
+                    ),
+                    hint: sub3Categ.length == 0
+                        ? Text(
+                            getLang(context, "SubCategories3"),
+                            style: TextStyle(color: PrimaryColor),
+                          )
+                        : lang == 'ar'
+                            ? Text(
+                                sub3Categ[0].nameAr,
+                                style: TextStyle(color: PrimaryColor),
+                              )
+                            : Text(
+                                sub3Categ[0].nameEn,
+                                style: TextStyle(color: PrimaryColor),
+                              ),
+                    onChanged: (String newValue4) {
+                      setState(() {
+                        _sub3Cat = newValue4;
+                        insertSub3(proID, _sub3Cat);
+                      });
+                    },
+                    items: sub3Cat.map((sub3Category) {
+                          return DropdownMenuItem(
+                              value: sub3Category.id.toString(),
+                              child: lang == 'ar'
+                                  ? Text(
+                                      sub3Category.nameAr,
+                                      style: TextStyle(color: Colors.black),
+                                    )
+                                  : Text(
+                                      sub3Category.nameEn,
+                                      style: TextStyle(color: Colors.black),
+                                    ));
+                        }).toList() ??
+                        [],
                   ),
-                  hint: lang == 'ar'
-                      ? Text(
-                          getLang(context, "SubCategories3"),
-                          style: TextStyle(color: PrimaryColor),
-                        )
-                      : Text(
-                          getLang(context, "SubCategories3"),
-                          style: TextStyle(color: PrimaryColor),
-                        ),
-                  onChanged: (String newValue4) {
-                    setState(() {
-                      _sub3Cat = newValue4;
-                      insertSub3(proID, _sub3Cat);
-                    });
-                  },
-                  items: sub3Cat.map((sub3Category) {
-                        return DropdownMenuItem(
-                            value: sub3Category.id.toString(),
-                            child: lang == 'ar'
-                                ? Text(
-                                    sub3Category.nameAr,
-                                    style: TextStyle(color: Colors.black),
-                                  )
-                                : Text(
-                                    sub3Category.nameEn,
-                                    style: TextStyle(color: Colors.black),
-                                  ));
-                      }).toList() ??
-                      [],
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
   }
 }

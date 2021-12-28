@@ -85,5 +85,11 @@
   "warranty" : "كفالة",
   "modelNumber" : "رقم المنتج",
   "brand" : "وكالة",
-  "ShippedOut":"شُحنت"
+  "ShippedOut":"شُحنت",
+  "Terms&Conditions" : "الشروط و الأحكام",
+  "Departments" : "القواعد",
+  "Productname" : "اسم المنتج",
+  "Quantity" : "الكمية",
+  "Totalprice": "المجموع الكلي",
+  "Price" : "السعر"
 }

@@ -23,6 +23,8 @@ class OrderItem {
     this.status,
     this.orderId,
     this.orderItemUserId,
+    this.productPaidFeatureLabel,
+    this.productPaidFeatureWeight,
     this.totalPrice,
     this.userId,
     this.name,
@@ -30,6 +32,8 @@ class OrderItem {
     this.nameEn,
     this.nameAr,
     this.image,
+    this.statusEn,
+    this.statusAr,
   });
 
   final int itemsId;
@@ -39,17 +43,21 @@ class OrderItem {
   final String createdAt;
   final int colorId;
   final int quantity;
-  final dynamic price;
+  final num price;
   final int status;
   final int orderId;
   final int orderItemUserId;
-  final int totalPrice;
+  final dynamic productPaidFeatureLabel;
+  final dynamic productPaidFeatureWeight;
+  final num totalPrice;
   final int userId;
   final String name;
   final dynamic phone;
   final String nameEn;
   final String nameAr;
   final String image;
+  final String statusEn;
+  final String statusAr;
 
   factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
         itemsId: json["itemsID"],
@@ -63,6 +71,8 @@ class OrderItem {
         status: json["status"],
         orderId: json["orderID"],
         orderItemUserId: json["user_id"],
+        productPaidFeatureLabel: json["product_paid_feature_label"],
+        productPaidFeatureWeight: json["product_paid_feature_weight"],
         totalPrice: json["total_price"],
         userId: json["userID"],
         name: json["name"],
@@ -70,6 +80,8 @@ class OrderItem {
         nameEn: json["name_en"],
         nameAr: json["name_ar"],
         image: json["image"],
+        statusEn: json["status_en"],
+        statusAr: json["status_ar"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,6 +96,8 @@ class OrderItem {
         "status": status,
         "orderID": orderId,
         "user_id": orderItemUserId,
+        "product_paid_feature_label": productPaidFeatureLabel,
+        "product_paid_feature_weight": productPaidFeatureWeight,
         "total_price": totalPrice,
         "userID": userId,
         "name": name,
@@ -91,5 +105,7 @@ class OrderItem {
         "name_en": nameEn,
         "name_ar": nameAr,
         "image": image,
+        "status_en": statusEn,
+        "status_ar": statusAr,
       };
 }

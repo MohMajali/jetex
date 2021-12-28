@@ -244,9 +244,7 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
                         decoration: InputDecoration(
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                          hintText: lang == 'ar'
-                              ? getLang(context, "ProductinEnglish")
-                              : getLang(context, "ProductinEnglish"),
+                          hintText: getLang(context, "ProductinEnglish"),
                           hintStyle: TextStyle(
                               color: PrimaryColor,
                               letterSpacing: 0,
@@ -262,9 +260,7 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
                         decoration: InputDecoration(
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                          hintText: lang == 'ar'
-                              ? getLang(context, "ProductinArabic")
-                              : getLang(context, "ProductinArabic"),
+                          hintText: getLang(context, "ProductinArabic"),
                           hintStyle: TextStyle(
                               color: PrimaryColor,
                               letterSpacing: 0,
@@ -281,9 +277,7 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
                         decoration: InputDecoration(
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                          hintText: lang == 'ar'
-                              ? getLang(context, "price")
-                              : getLang(context, "price"),
+                          hintText: getLang(context, "price"),
                           hintStyle: TextStyle(
                               color: PrimaryColor,
                               letterSpacing: 0,

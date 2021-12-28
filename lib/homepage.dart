@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jettaexstores/Module/Info_Api.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
@@ -46,7 +48,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future updateLogo(var productId, String imageName, String imageCode) async {
-    String url = 'http://45.76.132.167/api/authentication/UpdateLogo.php';
+    String url = Api.updateLogo;
     final response = await http.post(Uri.parse(url), body: {
       "id": productId.toString(),
       "store_logo": imageName,
@@ -55,7 +57,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future deleteLogo(var id) async {
-    String url = 'http://45.76.132.167/api/authentication/deleteLogo.php';
+    String url = Api.deleteLogo;
     try {
       final response =
           await http.post(Uri.parse(url), body: {"id": id.toString()});
@@ -88,8 +90,55 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    //from firebase************
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification notification = message.notification;
+      AndroidNotification android = message.notification?.android;
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                color: Colors.blue,
+                playSound: true,
+                icon: "@mipmap/jettaex",
+              ),
+            ));
+      }
+      // print(notification!.title);
+      // print(notification.body);
+    });
+    //when i click notify ******************
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+      RemoteNotification notification = message.notification;
+      AndroidNotification android = message.notification.android;
+      if (notification != null && android != null) {
+        // Navigator.of(context).push(
+        //     MaterialPageRoute(
+        //       builder: (context)=>Notifications(),
+        //     )
+        // );
+        showDialog(
+            context: context,
+            builder: (_) {
+              return AlertDialog(
+                title: Text(notification.title.toString()),
+                content: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [Text(notification.body.toString())],
+                  ),
+                ),
+              );
+            });
+      }
+    });
     //_getData();
     //setdata();
   }
@@ -119,6 +168,27 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Row buildNotificationOptionRow(String title, bool isActive) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey[600]),
+        ),
+        Transform.scale(
+            scale: 0.7,
+            child: CupertinoSwitch(
+              value: isActive,
+              onChanged: (bool val) {},
+            ))
+      ],
     );
   }
 
@@ -188,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                         3.5,
                     child: _image == null
                         ? Image.network(
-                            'https://jettaex.net/storelogos/' +
+                            Api.storeLogo +
                                 sharedPreferences.getString('storeLogo'),
                             fit: BoxFit.cover,
                             loadingBuilder: (BuildContext context, Widget child,

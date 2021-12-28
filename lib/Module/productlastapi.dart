@@ -31,9 +31,9 @@ class ProductsApi {
   final String nameAr;
   final String descriptionEn;
   final String descriptionAr;
-  final int price;
+  final num price;
   final String image;
-  final int discount;
+  final num discount;
   final dynamic brandId;
   final dynamic warranty;
   final dynamic modelNumber;

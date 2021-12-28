@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
   final List<Widget> screens = [
     HomePage(),
     NoteficationScreen(),
-    SettingScreen()
+    SetteingScreen()
   ]; // to store nested tabs
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = HomePage(); // Our first view in viewport
@@ -97,7 +97,7 @@ class _HomeState extends State<Home> {
                   onPressed: () {
                     setState(() {
                       currentScreen =
-                          SettingScreen(); // if user taps on this dashboard tab will be active
+                          SetteingScreen(); // if user taps on this dashboard tab will be active
                       currentTab = 4;
                     });
                   },

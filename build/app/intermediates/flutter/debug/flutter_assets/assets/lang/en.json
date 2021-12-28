@@ -84,5 +84,11 @@
   "warranty" : "Warranty",
   "modelNumber" : "Model Number",
   "brand" : "Brand",
-  "ShippedOut" : "Shipped Out"
+  "ShippedOut" : "Shipped Out",
+  "Terms&Conditions" : "Terms&Conditions",
+  "Departments" : "Departments",
+  "Productname" : "Product name",
+  "Quantity" : "Quantity",
+  "Totalprice" : "Total price",
+  "Price" : "Price"
 }

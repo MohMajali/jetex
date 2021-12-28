@@ -166,8 +166,15 @@ class _RevewiesScreenState extends State<RevewiesScreen> {
                                                     BorderRadiusDirectional
                                                         .circular(8),
                                                 image: DecorationImage(
-                                                    image: NetworkImage(
-                                                        'https://images-na.ssl-images-amazon.com/images/I/513CiKyzUWL.jpg'),
+                                                    image: reviewApi
+                                                                .profilePhotoPath ==
+                                                            null
+                                                        ? NetworkImage(
+                                                            'https://images-na.ssl-images-amazon.com/images/I/513CiKyzUWL.jpg')
+                                                        : NetworkImage(Api
+                                                                .userimg +
+                                                            reviewApi
+                                                                .profilePhotoPath),
                                                     fit: BoxFit.fill)),
                                           ),
                                           SizedBox(

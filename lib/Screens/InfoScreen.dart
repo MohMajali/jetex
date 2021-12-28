@@ -90,7 +90,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         Card(
                           color: SecondryColor,
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            padding: const EdgeInsets.all(5),
                             child: ListTile(
                               onTap: () async {
                                 enlgihDialog();
@@ -99,9 +99,8 @@ class _InfoScreenState extends State<InfoScreen> {
                                 text: TextSpan(
                                   text: maininfo.nameEn,
                                   style: TextStyle(
-                                      fontFamily: 'Simpletax',
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.w200,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
                                       color: PrimaryColor),
                                 ),
                               ),
@@ -115,7 +114,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         Card(
                           color: SecondryColor,
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            padding: const EdgeInsets.all(5),
                             child: ListTile(
                               onTap: () {
                                 setState(() {
@@ -126,9 +125,8 @@ class _InfoScreenState extends State<InfoScreen> {
                                 text: TextSpan(
                                   text: maininfo.nameAr,
                                   style: TextStyle(
-                                      fontFamily: 'Simpletax',
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.w200,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
                                       color: PrimaryColor),
                                 ),
                               ),
@@ -140,7 +138,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         Card(
                           color: SecondryColor,
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            padding: const EdgeInsets.all(5),
                             child: ListTile(
                               onTap: () {
                                 setState(() {
@@ -151,9 +149,8 @@ class _InfoScreenState extends State<InfoScreen> {
                                 text: TextSpan(
                                   text: maininfo.phoneNumber.toString(),
                                   style: TextStyle(
-                                      fontFamily: 'Simpletax',
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.w200,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
                                       color: PrimaryColor),
                                 ),
                               ),
@@ -165,7 +162,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         Card(
                           color: SecondryColor,
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            padding: const EdgeInsets.all(5),
                             child: ListTile(
                               onTap: () {
                                 setState(() {
@@ -176,9 +173,8 @@ class _InfoScreenState extends State<InfoScreen> {
                                 text: TextSpan(
                                   text: maininfo.storeEmail,
                                   style: TextStyle(
-                                      fontFamily: 'Simpletax',
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.w200,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
                                       color: PrimaryColor),
                                 ),
                               ),
@@ -254,51 +250,91 @@ class _InfoScreenState extends State<InfoScreen> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
+          contentPadding: EdgeInsets.all(2),
           backgroundColor: SecondryColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
           content: SingleChildScrollView(
             child: Form(
               child: Container(
-                height: MediaQuery.of(context).size.height * .25,
-                width: MediaQuery.of(context).size.width * .7,
+                width: 50,
+                padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   color: SecondryColor,
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  //crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ListTile(
-                      leading: Text(
-                        '+962',
-                        style: TextStyle(color: PrimaryColor, fontSize: 15),
-                      ),
-                      title: TextFormField(
-                        controller: pn,
-                        maxLength: 9,
-                        style: TextStyle(color: PrimaryColor),
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          // icon: IconButton(
-                          //   icon: const Icon(Icons.edit),
-                          //   color: PrimaryColor,
-                          //   onPressed: () {
-                          //     setState(() {});
-                          //   },
-                          // ),
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                          hintText: getLang(context, "InfoPhoneEdit"),
-                          hintStyle: TextStyle(
-                              color: PrimaryColor,
-                              letterSpacing: 0,
-                              fontSize: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('+962',
+                            style:
+                                TextStyle(color: PrimaryColor, fontSize: 15)),
+                        Container(
+                          width: 190,
+                          padding: EdgeInsets.all(0),
+                          decoration: BoxDecoration(),
+                          child: TextFormField(
+                            style: TextStyle(color: Colors.amber, fontSize: 15),
+                            cursorColor: PrimaryColor,
+                            maxLength: 9,
+                            keyboardType: TextInputType.phone,
+                            decoration: InputDecoration(
+                              labelText: getLang(context, "InfoPhoneEdit"),
+                              labelStyle: TextStyle(color: PrimaryColor),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(1.0),
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(1.0),
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(1.0),
+                                borderSide: BorderSide(
+                                  color: PrimaryColor,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(1.0),
+                                borderSide: BorderSide(
+                                  color: PrimaryColor,
+                                  width: 2.0,
+                                ),
+                              ),
+                            ),
+                            controller: pn,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "";
+                              }
+                              return null;
+                            },
+                            onSaved: (newvalue) {
+                              // signUPUserEmail = newvalue!;
+                            },
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                     InkWell(
                       onTap: () async {
-                        if (pn.text[0] == '0') {
+                        if (pn.text == '') {
+                          final snackBar = SnackBar(
+                            content: const Text(
+                              "Phone should not be empty",
+                              style: TextStyle(color: PrimaryColor),
+                            ),
+                            action: SnackBarAction(label: '', onPressed: () {}),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } else if (pn.text[0] == '0') {
                           final snackBar = SnackBar(
                             content: const Text(
                               "Phone should not have 0",
@@ -310,6 +346,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         } else {
                           await updatePhone(getStore, pn.text);
                           setState(() {
+                            sharedPreferences.remove("phoneNumber");
                             sharedPreferences.setString("phoneNumber", pn.text);
 
                             Navigator.of(context).pop();
@@ -324,7 +361,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .4,
+                        width: MediaQuery.of(context).size.width * .8,
                         decoration: BoxDecoration(
                             color: PrimaryColor,
                             borderRadius:
@@ -357,14 +394,14 @@ class _InfoScreenState extends State<InfoScreen> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
+          contentPadding: EdgeInsets.all(2),
           backgroundColor: SecondryColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           content: SingleChildScrollView(
             child: Form(
               child: Container(
-                height: MediaQuery.of(context).size.height * .25,
-                width: MediaQuery.of(context).size.width * .9,
+                width: 50,
+                padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   color: SecondryColor,
                 ),
@@ -372,31 +409,67 @@ class _InfoScreenState extends State<InfoScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ListTile(
-                      title: TextFormField(
-                        controller: em,
-                        style: TextStyle(color: PrimaryColor),
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          icon: IconButton(
-                            icon: const Icon(Icons.edit),
-                            color: PrimaryColor,
-                            onPressed: () {
-                              setState(() {});
-                            },
+                      title: Container(
+                        padding: EdgeInsets.all(0),
+                        decoration: BoxDecoration(),
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.amber, fontSize: 15),
+                          cursorColor: PrimaryColor,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            labelText: getLang(context, "InfoEmailEdit"),
+                            labelStyle: TextStyle(color: PrimaryColor),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: PrimaryColor,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: PrimaryColor,
+                                width: 2.0,
+                              ),
+                            ),
                           ),
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                          hintText: getLang(context, "InfoEmailEdit"),
-                          hintStyle: TextStyle(
-                              color: PrimaryColor,
-                              letterSpacing: 0,
-                              fontSize: 10),
+                          controller: em,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "";
+                            }
+                            return null;
+                          },
+                          onSaved: (newvalue) {
+                            // signUPUserEmail = newvalue!;
+                          },
                         ),
                       ),
                     ),
                     InkWell(
                       onTap: () async {
-                        if (!em.text.contains('@')) {
+                        if (em.text == '') {
+                          final snackBar = SnackBar(
+                            content: const Text(
+                              "Field must not be empty",
+                              style: TextStyle(color: PrimaryColor),
+                            ),
+                            action: SnackBarAction(label: '', onPressed: () {}),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } else if (!em.text.contains('@')) {
                           final snackBar = SnackBar(
                             content: const Text(
                               "Email Should Have @",
@@ -408,6 +481,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         } else {
                           await updateMail(getStore, em.text);
                           setState(() {
+                            sharedPreferences.remove("storeEmail");
                             sharedPreferences.setString("storeEmail", em.text);
 
                             Navigator.of(context).pop();
@@ -422,7 +496,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .4,
+                        width: MediaQuery.of(context).size.width * .8,
                         decoration: BoxDecoration(
                             color: PrimaryColor,
                             borderRadius:
@@ -455,40 +529,67 @@ class _InfoScreenState extends State<InfoScreen> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
+          contentPadding: EdgeInsets.all(2),
           backgroundColor: SecondryColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           content: SingleChildScrollView(
             child: Form(
               child: Container(
-                height: MediaQuery.of(context).size.height * .25,
-                width: MediaQuery.of(context).size.width * 1,
+                width: 50,
+                padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   color: SecondryColor,
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ListTile(
-                      title: TextFormField(
-                        controller: en,
-                        style: TextStyle(color: PrimaryColor),
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          icon: IconButton(
-                            icon: const Icon(Icons.edit),
-                            color: PrimaryColor,
-                            onPressed: () {
-                              setState(() {});
-                            },
+                      title: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(),
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.amber, fontSize: 15),
+                          cursorColor: PrimaryColor,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            labelText: getLang(context, "InfoStorename"),
+                            labelStyle: TextStyle(color: PrimaryColor),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: PrimaryColor,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: PrimaryColor,
+                                width: 2.0,
+                              ),
+                            ),
                           ),
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                          hintText: getLang(context, "InfoStorename"),
-                          hintStyle: TextStyle(
-                              color: PrimaryColor,
-                              letterSpacing: 0,
-                              fontSize: 10),
+                          controller: en,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "";
+                            }
+                            return null;
+                          },
+                          onSaved: (newvalue) {
+                            // signUPUserEmail = newvalue!;
+                          },
                         ),
                       ),
                     ),
@@ -510,7 +611,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .4,
+                        width: MediaQuery.of(context).size.width * .8,
                         decoration: BoxDecoration(
                             color: PrimaryColor,
                             borderRadius:
@@ -543,40 +644,66 @@ class _InfoScreenState extends State<InfoScreen> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
+          contentPadding: EdgeInsets.all(2),
           backgroundColor: SecondryColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           content: SingleChildScrollView(
             child: Form(
               child: Container(
-                height: MediaQuery.of(context).size.height * .25,
-                width: MediaQuery.of(context).size.width * .7,
+                width: 50,
+                padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   color: SecondryColor,
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ListTile(
-                      title: TextFormField(
-                        controller: ar,
-                        style: TextStyle(color: PrimaryColor),
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          icon: IconButton(
-                            icon: const Icon(Icons.edit),
-                            color: PrimaryColor,
-                            onPressed: () {
-                              setState(() {});
-                            },
+                      title: Container(
+                        padding: EdgeInsets.all(0),
+                        decoration: BoxDecoration(),
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.amber, fontSize: 15),
+                          cursorColor: PrimaryColor,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            labelText: getLang(context, "InfoarStorename"),
+                            labelStyle: TextStyle(color: PrimaryColor),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: PrimaryColor,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: PrimaryColor,
+                                width: 2.0,
+                              ),
+                            ),
                           ),
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                          hintText: getLang(context, "InfoarStorename"),
-                          hintStyle: TextStyle(
-                              color: PrimaryColor,
-                              letterSpacing: 0,
-                              fontSize: 10),
+                          controller: ar,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "";
+                            }
+                            return null;
+                          },
+                          onSaved: (newvalue) {
+                            // signUPUserEmail = newvalue!;
+                          },
                         ),
                       ),
                     ),
@@ -584,6 +711,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       onTap: () async {
                         await updateArabic(getStore, ar.text);
                         setState(() {
+                          sharedPreferences.remove("storeNameAr");
                           sharedPreferences.setString('storeNameAr', ar.text);
 
                           Navigator.of(context).pop();
@@ -597,7 +725,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .4,
+                        width: MediaQuery.of(context).size.width * .8,
                         decoration: BoxDecoration(
                             color: PrimaryColor,
                             borderRadius:
@@ -619,71 +747,4 @@ class _InfoScreenState extends State<InfoScreen> {
           )),
     );
   }
-
-  // Future<bool> locationalertDialog() {
-  //   TextEditingController lo = TextEditingController();
-  //   return showDialog(
-  //     context: context,
-  //     builder: (context) => AlertDialog(
-  //         backgroundColor: SecondryColor,
-  //         shape:
-  //             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-  //         content: SingleChildScrollView(
-  //           child: Form(
-  //             child: Container(
-  //               height: MediaQuery.of(context).size.height * .4,
-  //               width: MediaQuery.of(context).size.width * .7,
-  //               decoration: BoxDecoration(
-  //                 color: SecondryColor,
-  //               ),
-  //               child: Column(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //                 children: [
-  //                   ListTile(
-  //                     leading: Icon(
-  //                       Icons.location_on,
-  //                       color: PrimaryColor,
-  //                     ),
-  //                     title: TextFormField(
-  //                       controller: lo,
-  //                       style: TextStyle(color: PrimaryColor),
-  //                       keyboardType: TextInputType.text,
-  //                       decoration: InputDecoration(
-  //                         labelText: getLang(context, "InfoStoreLocation"),
-  //                         labelStyle: TextStyle(color: PrimaryColor),
-  //                       ),
-  //                     ),
-  //                   ),
-  //                   InkWell(
-  //                     onTap: () {
-  //                       setState(() {
-  //                         // Infoapi inf = Infoapi(storeLocation: lo.text);
-  //                         // Insert(inf);
-  //                         Navigator.of(context).pop();
-  //                       });
-  //                     },
-  //                     child: Container(
-  //                       height: MediaQuery.of(context).size.height * .05,
-  //                       width: MediaQuery.of(context).size.width * .4,
-  //                       decoration: BoxDecoration(
-  //                           color: PrimaryColor,
-  //                           borderRadius:
-  //                               BorderRadius.all(Radius.circular(15))),
-  //                       child: Center(
-  //                           child: Text(
-  //                         getLang(context, "InfoSaveBottn"),
-  //                         style: TextStyle(
-  //                             color: SecondryColor,
-  //                             fontWeight: FontWeight.bold,
-  //                             fontSize: 15),
-  //                       )),
-  //                     ),
-  //                   )
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //         )),
-  //   );
-  // }
 }
