@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">1082949000823-aiqu1qjare6n6k51love5v7b52bbcugi.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">1082949000823</string>
+    <string name="google_api_key" translatable="false">AIzaSyDONLyevM31S2uYHuyYvQUdP4Eo2AfJoeM</string>
+    <string name="google_app_id" translatable="false">1:1082949000823:android:2706a6688900bb37def072</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDONLyevM31S2uYHuyYvQUdP4Eo2AfJoeM</string>
+    <string name="google_storage_bucket" translatable="false">jettaex-70842.appspot.com</string>
+    <string name="project_id" translatable="false">jettaex-70842</string>
+</resources>

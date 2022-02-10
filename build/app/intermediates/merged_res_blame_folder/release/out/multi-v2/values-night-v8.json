@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\digiFrameflutter\\jetex\\jet-main\\build\\app\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "map": [
+                {
+                    "source": "D:\\digiFrameflutter\\jetex\\jet-main\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "from": {
+                        "startLines": "3,9",
+                        "startColumns": "4,4",
+                        "startOffsets": "60,301",
+                        "endLines": "7,11",
+                        "endColumns": "12,12",
+                        "endOffsets": "291,465"
+                    },
+                    "to": {
+                        "startLines": "2,7",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,291",
+                        "endLines": "6,9",
+                        "endColumns": "12,12",
+                        "endOffsets": "286,455"
+                    }
+                }
+            ]
+        }
+    ]
+}

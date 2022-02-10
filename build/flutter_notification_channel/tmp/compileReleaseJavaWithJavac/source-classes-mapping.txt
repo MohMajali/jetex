@@ -1,0 +1,4 @@
+com/softmaestri/notification/channel/flutter_notification_channel/BuildConfig.java
+ com.softmaestri.notification.channel.flutter_notification_channel.BuildConfig
+com/softmaestri/notification/channel/flutter_notification_channel/FlutterNotificationChannelPlugin.java
+ com.softmaestri.notification.channel.flutter_notification_channel.FlutterNotificationChannelPlugin
