@@ -1,8 +1,8 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.jetedit"
-4    android:versionCode="1"
-5    android:versionName="1.0.0" >
+3    package="com.Jettaex.android.jetedit"
+4    android:versionCode="2"
+5    android:versionName="1.0.1" >
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
@@ -213,7 +213,7 @@
 123-->[:firebase_messaging] D:\digiFrameflutter\jetex\jet-main\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:39:9-43:38
 124            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
 124-->[:firebase_messaging] D:\digiFrameflutter\jetex\jet-main\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:40:13-102
-125            android:authorities="com.example.jetedit.flutterfirebasemessaginginitprovider"
+125            android:authorities="com.Jettaex.android.jetedit.flutterfirebasemessaginginitprovider"
 125-->[:firebase_messaging] D:\digiFrameflutter\jetex\jet-main\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:41:13-88
 126            android:exported="false"
 126-->[:firebase_messaging] D:\digiFrameflutter\jetex\jet-main\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:42:13-37
@@ -223,7 +223,7 @@
 128-->[:image_picker] D:\digiFrameflutter\jetex\jet-main\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-16:20
 129            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
 129-->[:image_picker] D:\digiFrameflutter\jetex\jet-main\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-82
-130            android:authorities="com.example.jetedit.flutter.image_provider"
+130            android:authorities="com.Jettaex.android.jetedit.flutter.image_provider"
 130-->[:image_picker] D:\digiFrameflutter\jetex\jet-main\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-74
 131            android:exported="false"
 131-->[:image_picker] D:\digiFrameflutter\jetex\jet-main\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-37
@@ -418,7 +418,7 @@
 233-->[com.google.firebase:firebase-common:20.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\e8c12af64c0d197211b7d090cb61cdf8\jetified-firebase-common-20.0.0\AndroidManifest.xml:26:9-31:39
 234            android:name="com.google.firebase.provider.FirebaseInitProvider"
 234-->[com.google.firebase:firebase-common:20.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\e8c12af64c0d197211b7d090cb61cdf8\jetified-firebase-common-20.0.0\AndroidManifest.xml:27:13-77
-235            android:authorities="com.example.jetedit.firebaseinitprovider"
+235            android:authorities="com.Jettaex.android.jetedit.firebaseinitprovider"
 235-->[com.google.firebase:firebase-common:20.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\e8c12af64c0d197211b7d090cb61cdf8\jetified-firebase-common-20.0.0\AndroidManifest.xml:28:13-72
 236            android:directBootAware="true"
 236-->[com.google.firebase:firebase-common:20.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\e8c12af64c0d197211b7d090cb61cdf8\jetified-firebase-common-20.0.0\AndroidManifest.xml:29:13-43

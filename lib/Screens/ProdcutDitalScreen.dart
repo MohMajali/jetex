@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jettaexstores/Module/productlastapi.dart';
 import 'package:jettaexstores/Provider/Localapp.dart';
+import 'package:jettaexstores/Screens/productsignleEdit.dart';
 import 'package:jettaexstores/Widget/NavBar.dart';
 import 'package:jettaexstores/alertdilog.dart';
 import 'package:jettaexstores/config/Configers.dart';
@@ -121,21 +122,31 @@ class _ProscutDitalScreenState extends State<ProscutDitalScreen> {
                 secondaryActions: <Widget>[
                   InkWell(
                       onTap: () {
-                        sharedPreferences.setInt(
-                            'selectedProductID', productsApi.id);
+                        // sharedPreferences.setInt(
+                        //     'selectedProductID', productsApi.id);
+                        // Navigator.of(context).pop();
+                        // Navigator.pushNamed(context, 'EditProduct',
+                        //  arguments: {
+                        //   "id": productsApi.id,
+                        //   "namear": productsApi.nameAr,
+                        //   "nameen": productsApi.nameEn,
+                        //   "image": productsApi.image,
+                        //   "desar": productsApi.descriptionAr,
+                        //   "desen": productsApi.descriptionEn,
+                        //   "price": productsApi.price,
+                        //   "discount": productsApi.discount,
+                        //   "warranty": productsApi.warranty,
+                        //   "modelNumber": productsApi.modelNumber
+                        // });
                         Navigator.of(context).pop();
-                        Navigator.pushNamed(context, 'EditProduct', arguments: {
-                          "id": productsApi.id,
-                          "namear": productsApi.nameAr,
-                          "nameen": productsApi.nameEn,
-                          "image": productsApi.image,
-                          "desar": productsApi.descriptionAr,
-                          "desen": productsApi.descriptionEn,
-                          "price": productsApi.price,
-                          "discount": productsApi.discount,
-                          "warranty": productsApi.warranty,
-                          "modelNumber": productsApi.modelNumber
-                        });
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignleEditPro(
+                                      nameEn: productsApi.nameEn,
+                                      nameAr: productsApi.nameAr,
+                                      id: productsApi.id,
+                                    )));
                       },
                       child: slideContiner(Icons.edit, Colors.black54,
                           getLang(context, "Edit"))),

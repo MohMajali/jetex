@@ -252,76 +252,70 @@ class _InfoScreenState extends State<InfoScreen> {
       builder: (context) => AlertDialog(
           contentPadding: EdgeInsets.all(2),
           backgroundColor: SecondryColor,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           content: SingleChildScrollView(
             child: Form(
               child: Container(
                 width: 50,
+                height: 180,
                 padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   color: SecondryColor,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  //crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('+962',
-                            style:
-                                TextStyle(color: PrimaryColor, fontSize: 15)),
-                        Container(
-                          width: 190,
-                          padding: EdgeInsets.all(0),
-                          decoration: BoxDecoration(),
-                          child: TextFormField(
-                            style: TextStyle(color: Colors.amber, fontSize: 15),
-                            cursorColor: PrimaryColor,
-                            maxLength: 9,
-                            keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
-                              labelText: getLang(context, "InfoPhoneEdit"),
-                              labelStyle: TextStyle(color: PrimaryColor),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(1.0),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
-                                ),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(1.0),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(1.0),
-                                borderSide: BorderSide(
-                                  color: PrimaryColor,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(1.0),
-                                borderSide: BorderSide(
-                                  color: PrimaryColor,
-                                  width: 2.0,
-                                ),
+                    ListTile(
+                      title: Container(
+                        padding: EdgeInsets.all(0),
+                        decoration: BoxDecoration(),
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.amber, fontSize: 15),
+                          cursorColor: PrimaryColor,
+                          maxLength: 9,
+                          keyboardType: TextInputType.phone,
+                          decoration: InputDecoration(
+                            labelText:
+                                '+962| ' + getLang(context, "InfoPhoneEdit"),
+                            labelStyle: TextStyle(color: PrimaryColor),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: Colors.red,
                               ),
                             ),
-                            controller: pn,
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "";
-                              }
-                              return null;
-                            },
-                            onSaved: (newvalue) {
-                              // signUPUserEmail = newvalue!;
-                            },
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: PrimaryColor,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: PrimaryColor,
+                                width: 2.0,
+                              ),
+                            ),
                           ),
+                          controller: pn,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "";
+                            }
+                            return null;
+                          },
+                          onSaved: (newvalue) {
+                            // signUPUserEmail = newvalue!;
+                          },
                         ),
-                      ],
+                      ),
                     ),
                     InkWell(
                       onTap: () async {
@@ -361,7 +355,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .8,
+                        width: MediaQuery.of(context).size.width * .3,
                         decoration: BoxDecoration(
                             color: PrimaryColor,
                             borderRadius:
@@ -401,12 +395,13 @@ class _InfoScreenState extends State<InfoScreen> {
             child: Form(
               child: Container(
                 width: 50,
+                height: 180,
                 padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   color: SecondryColor,
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ListTile(
                       title: Container(
@@ -458,6 +453,9 @@ class _InfoScreenState extends State<InfoScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     InkWell(
                       onTap: () async {
                         if (em.text == '') {
@@ -496,7 +494,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .8,
+                        width: MediaQuery.of(context).size.width * .3,
                         decoration: BoxDecoration(
                             color: PrimaryColor,
                             borderRadius:
@@ -536,11 +534,13 @@ class _InfoScreenState extends State<InfoScreen> {
             child: Form(
               child: Container(
                 width: 50,
+                height: 180,
                 padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   color: SecondryColor,
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ListTile(
                       title: Container(
@@ -593,6 +593,9 @@ class _InfoScreenState extends State<InfoScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     InkWell(
                       onTap: () async {
                         await update(getStore, en.text);
@@ -611,7 +614,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .8,
+                        width: MediaQuery.of(context).size.width * .3,
                         decoration: BoxDecoration(
                             color: PrimaryColor,
                             borderRadius:
@@ -651,11 +654,13 @@ class _InfoScreenState extends State<InfoScreen> {
             child: Form(
               child: Container(
                 width: 50,
+                height: 180,
                 padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   color: SecondryColor,
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ListTile(
                       title: Container(
@@ -707,6 +712,9 @@ class _InfoScreenState extends State<InfoScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     InkWell(
                       onTap: () async {
                         await updateArabic(getStore, ar.text);
@@ -725,7 +733,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .8,
+                        width: MediaQuery.of(context).size.width * .3,
                         decoration: BoxDecoration(
                             color: PrimaryColor,
                             borderRadius:

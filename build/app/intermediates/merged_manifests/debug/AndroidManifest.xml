@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jetedit"
-    android:versionCode="1"
-    android:versionName="1.0.0" >
+    package="com.Jettaex.android.jetedit"
+    android:versionCode="2"
+    android:versionName="1.0.1" >
 
     <uses-sdk
         android:minSdkVersion="21"
@@ -122,12 +122,12 @@
 
         <provider
             android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
-            android:authorities="com.example.jetedit.flutterfirebasemessaginginitprovider"
+            android:authorities="com.Jettaex.android.jetedit.flutterfirebasemessaginginitprovider"
             android:exported="false"
             android:initOrder="99" />
         <provider
             android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-            android:authorities="com.example.jetedit.flutter.image_provider"
+            android:authorities="com.Jettaex.android.jetedit.flutter.image_provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -232,7 +232,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.example.jetedit.firebaseinitprovider"
+            android:authorities="com.Jettaex.android.jetedit.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />

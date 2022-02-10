@@ -20,6 +20,8 @@ class ProductsApi {
     this.price,
     this.image,
     this.discount,
+    this.warranty,
+    this.modelNumber,
   });
 
   final int id;
@@ -30,6 +32,8 @@ class ProductsApi {
   final num price;
   final String image;
   final num discount;
+  final dynamic warranty;
+  final dynamic modelNumber;
 
   factory ProductsApi.fromJson(Map<String, dynamic> json) => ProductsApi(
         id: json["id"],
@@ -40,6 +44,8 @@ class ProductsApi {
         price: json["price"],
         image: json["image"],
         discount: json["discount"],
+        warranty: json["warranty"],
+        modelNumber: json["model_number"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -51,5 +57,7 @@ class ProductsApi {
         "price": price,
         "image": image,
         "discount": discount,
+        "warranty": warranty,
+        "model_number": modelNumber,
       };
 }

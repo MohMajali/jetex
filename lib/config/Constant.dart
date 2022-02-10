@@ -98,6 +98,38 @@ Container loginstoreconterinr(
   );
 }
 
+Container editSingle(
+  String text,
+  BuildContext context,
+  Widget goto,
+  Key key,
+) {
+  return Container(
+    height: 70,
+    width: 100,
+    color: SecondryColor,
+    child: ListTile(
+      key: key,
+      title: Text(
+        text,
+        style: const TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
+      ),
+      onTap: () {
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => goto),
+        );
+      },
+      trailing: Icon(Icons.arrow_forward_ios_outlined),
+    ),
+  );
+}
+
 Container loginsavebutton(BuildContext context) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 5),

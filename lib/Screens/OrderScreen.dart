@@ -159,11 +159,11 @@ class _OrderScreenState extends State<OrderScreen> {
                   SizedBox(
                     width: 10,
                   ),
-                  statuemethod(accepted, getLang(context, 'Ready')),
+                  statuemethod(accepted, getLang(context, 'accept')),
                   SizedBox(
                     width: 10,
                   ),
-                  statuemethod(statusReady, 'shipp out'),
+                  statuemethod(statusReady, getLang(context, 'Ready')),
                   SizedBox(
                     width: 10,
                   ),
@@ -358,97 +358,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     itemBuilder: (context, int index) {
                       StatuShipped statuShipped = shippied[index];
                       return InkWell(
-                        onTap: () {
-                          // showModalBottomSheet(
-                          //     // context: context,
-                          //     // builder: (context) {
-                          //     //   return Container(
-                          //     //       decoration: BoxDecoration(
-                          //     //           color: SecondryColor,
-                          //     //           borderRadius: BorderRadius.only(
-                          //     //               topRight: Radius.circular(20),
-                          //     //               topLeft: Radius.circular(20))),
-                          //     //       height:
-                          //     //           MediaQuery.of(context).size.height * .5,
-                          //     //       child: SingleChildScrollView(
-                          //     //         child: Column(
-                          //     //           children: [
-                          //     //             SizedBox(
-                          //     //               height: 9,
-                          //     //             ),
-                          //     //             Divider(
-                          //     //               thickness: 4,
-                          //     //               color: PrimaryColor,
-                          //     //               height: 8,
-                          //     //               endIndent: 110,
-                          //     //               indent: 110,
-                          //     //             ),
-                          //     //             ListTile(
-                          //     //               title: Text(
-                          //     //                   getLang(context, 'Productname'),
-                          //     //                   style: TextStyle(
-                          //     //                       fontWeight: FontWeight.bold,
-                          //     //                       color: PrimaryColor)),
-                          //     //               trailing: lang == 'ar'
-                          //     //                   ? Text(order.nameAr,
-                          //     //                       style: TextStyle(
-                          //     //                         color: PrimaryColor,
-                          //     //                         fontWeight:
-                          //     //                             FontWeight.bold,
-                          //     //                       ))
-                          //     //                   : Text(order.nameEn,
-                          //     //                       style: TextStyle(
-                          //     //                         color: PrimaryColor,
-                          //     //                         fontWeight:
-                          //     //                             FontWeight.bold,
-                          //     //                       )),
-                          //     //             ),
-                          //     //             ListTile(
-                          //     //               title: Text(
-                          //     //                   getLang(context, 'Price'),
-                          //     //                   style: TextStyle(
-                          //     //                       fontWeight: FontWeight.bold,
-                          //     //                       color: PrimaryColor)),
-                          //     //               trailing: Text(
-                          //     //                   order.price.toString() + ' JOD',
-                          //     //                   style: TextStyle(
-                          //     //                     color: PrimaryColor,
-                          //     //                     fontWeight: FontWeight.bold,
-                          //     //                   )),
-                          //     //             ),
-                          //     //             ListTile(
-                          //     //               title: Text(
-                          //     //                   getLang(context, 'Quantity'),
-                          //     //                   style: TextStyle(
-                          //     //                       fontWeight: FontWeight.bold,
-                          //     //                       color: PrimaryColor)),
-                          //     //               trailing: Text(
-                          //     //                   order.quantity.toString(),
-                          //     //                   style: TextStyle(
-                          //     //                     color: PrimaryColor,
-                          //     //                     fontWeight: FontWeight.bold,
-                          //     //                   )),
-                          //     //             ),
-                          //     //             ListTile(
-                          //     //               title: Text(
-                          //     //                   getLang(context, 'Totalprice'),
-                          //     //                   style: TextStyle(
-                          //     //                       fontWeight: FontWeight.bold,
-                          //     //                       color: PrimaryColor)),
-                          //     //               trailing: Text(
-                          //     //                   order.totalPrice.toString() +
-                          //     //                       ' JOD',
-                          //     //                   style: TextStyle(
-                          //     //                     color: PrimaryColor,
-                          //     //                     fontWeight: FontWeight.bold,
-                          //     //                   )),
-                          //     //             ),
-                          //     //             orderListTile(order),
-                          //     //           ],
-                          //     //         ),
-                          //     //       ));
-                          //     // });
-                        },
+                        onTap: () {},
                         child: Container(
                           padding:
                               EdgeInsets.symmetric(vertical: 5, horizontal: 10),

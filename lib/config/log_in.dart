@@ -70,7 +70,7 @@ class loginp {
         sharedPreferences.setString("storeNameAr", storeNameAr);
         sharedPreferences.setDouble("storeRate", double.parse(rate));
         sharedPreferences.setString("storeType", storeType);
-        sharedPreferences.setString("storeEmail", storeEmail);
+        // sharedPreferences.setString("storeEmail", storeEmail);
         sharedPreferences.setString("userId", userId);
         sharedPreferences.setString("phoneNumber", phoneNumber);
         sharedPreferences.setString("Password", password);

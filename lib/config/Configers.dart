@@ -106,6 +106,14 @@ class Api {
       'https://jettaex.net/api/authentication/orderColor.php?store_id=';
   static const String getShipped =
       'https://jettaex.net/api/authentication/statusShipped.php?store_id=';
+  static const String insertPaidFeature =
+      'https://jettaex.net/api/authentication/paidFeature.php';
+  static const String getPaidFeature =
+      'https://jettaex.net/api/authentication/getPaidFeatures.php?product_id=';
+  static const String insertFeature =
+      'https://jettaex.net/api/authentication/feature.php';
+  static const String getFeature =
+      'https://jettaex.net/api/authentication/getFeature.php?product_id=';
   //------------------------------------------------------------//
   //images
 
